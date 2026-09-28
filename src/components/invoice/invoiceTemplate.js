@@ -147,8 +147,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     position: absolute; left: calc(50% - 80px); top: 2pt;
     transform: translateX(-50%) scaleX(.82);
     transform-origin: top center;
-    color: #ffff00; font: 700 47.5pt/1 Helvetica, Arial, sans-serif;
-    text-shadow: 1.2pt 1.2pt 0 #000, 0.6pt 0.6pt 0.8pt rgba(0,0,0,.5);
+    width: 52pt; height: 52pt;
     z-index: 1; opacity: .95;
     user-select: none; pointer-events: none;
   }
@@ -374,7 +373,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
         Reason: ${sigReason}<br>
         Location: ${sigLocation}
       </div>
-      <span class="sig-icon" aria-hidden="true">?</span>
+      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
     </div>
   </div>
 </div>
@@ -479,7 +478,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
         Reason: ${sigReason}<br>
         Location: ${sigLocation}
       </div>
-      <span class="sig-icon" aria-hidden="true">?</span>
+      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
     </div>
   </div>
 </div>
