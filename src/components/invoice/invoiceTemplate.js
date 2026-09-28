@@ -137,7 +137,7 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   #page1 .sig-wrap { top: 714pt; }
   .sig-text {
-    position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000;
+    position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
   }
   .sig-text .sig-body { position: relative; z-index: 3; }
   .sig-text .title {
