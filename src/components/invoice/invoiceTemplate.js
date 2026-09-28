@@ -61,7 +61,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     inv.p400_policy
   )}</title>
 <style>
-  @page { size: letter; margin: 0; }
+  @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0;
@@ -70,11 +70,11 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-weight: 400;
   }
   .page {
-    width: 612pt; height: 792pt; background: #fff;
+    width: 595pt; height: 842pt; background: #fff;
     margin: 16px auto; padding: 0; position: relative; overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
   }
-  .sheet { margin: 23.7pt 36pt 0 35pt; width: 541pt; }
+  .sheet { margin: 23.7pt 27pt 0 27pt; width: 541pt; }
   table.g {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
@@ -127,15 +127,15 @@ export function generateInvoiceHTML(inv, options = {}) {
   .animals td { height: 15pt; vertical-align: middle !important; padding: 0 2pt !important; }
   .disc { font-size: 7pt; line-height: 1.18; padding: 1.5pt 3.5pt 2.5pt !important; }
   .app {
-    margin: 22pt 36pt 0 35pt; width: 541pt;
+    margin: 22pt 27pt 0 27pt; width: 541pt;
     font-size: 10pt; line-height: 1.28; font-weight: 400;
   }
   .app a { color: #00f; }
   .sig-wrap {
-    position: absolute; left: 40pt; top: 726pt; width: 320pt; z-index: 5;
+    position: absolute; left: 40pt; top: 776pt; width: 320pt; z-index: 5;
     background: transparent;
   }
-  #page1 .sig-wrap { top: calc(714pt + 2px - 10px); }
+  #page1 .sig-wrap { top: calc(764pt + 2px - 10px); }
   .sig-text {
     position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
   }
