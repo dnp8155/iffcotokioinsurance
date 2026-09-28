@@ -137,18 +137,19 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   #page1 .sig-wrap { top: 714pt; }
   .sig-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .sig-table td { border: 0; padding: 0; vertical-align: middle; }
+  .sig-table td { border: 0; padding: 0; vertical-align: top; }
   .sig-table .sig-text {
     width: 320pt; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #1a1a1a;
   }
   .sig-table .sig-text .title {
     font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111;
   }
-  .sig-table .sig-icon-cell { width: 50pt; text-align: center; }
+  .sig-table .sig-icon-cell { width: 50pt; text-align: center; vertical-align: top; }
   .sig-table .sig-icon {
-    color: #ffffcc; font: 700 34pt/1 Helvetica, Arial, sans-serif;
+    color: #ffffcc; font: 700 28pt/1 Helvetica, Arial, sans-serif;
     text-shadow: 1.2pt 1.2pt 0 #000, 0.5pt 0.5pt 0.8pt rgba(0,0,0,.4);
-    transform: scaleX(.82); transform-origin: center;
+    transform: scaleX(.82); transform-origin: top center;
+    display: inline-block; margin-top: 2pt;
     user-select: none; pointer-events: none;
   }
   @media print {
