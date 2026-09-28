@@ -12,9 +12,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Plus, FileText, Eye, Pencil, Trash2 } from "lucide-react";
+import { Plus, FileText, Eye, Pencil, Trash2, LogOut } from "lucide-react";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function Invoices() {
+  const { logout } = useAuth();
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pendingDelete, setPendingDelete] = useState(null);
@@ -61,11 +63,16 @@ export default function Invoices() {
               IFFCO-TOKIO Pashu Dhan Bima Policy &amp; Tax Invoice
             </p>
           </div>
-          <Link to="/invoices/new" className="self-start sm:self-auto">
-            <Button className="w-full sm:w-auto">
-              <Plus className="w-4 h-4 mr-2" /> New Invoice
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <Link to="/invoices/new" className="flex-1 sm:flex-none">
+              <Button className="w-full sm:w-auto">
+                <Plus className="w-4 h-4 mr-2" /> New Invoice
+              </Button>
+            </Link>
+            <Button variant="outline" onClick={() => logout()} className="px-3">
+              <LogOut className="w-4 h-4" />
             </Button>
-          </Link>
+          </div>
         </div>
 
         {loading ? (
