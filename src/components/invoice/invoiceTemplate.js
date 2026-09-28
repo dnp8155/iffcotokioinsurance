@@ -32,7 +32,11 @@ const animalRows = (animals) => {
 // Generate the full HTML document matching the original IFFCO-TOKIO template exactly,
 // with dynamic data injected. Adds the "Muskurate Raho" tagline present in the original.
 export function generateInvoiceHTML(inv, options = {}) {
+  const qrSvg = options.qrSvg || null;
   const qrSrc = options.qrSrc || QR_BASE64;
+  const qrMarkup = qrSvg
+    ? qrSvg
+    : `<img src="${qrSrc}" alt="Policy QR code" style="width:88pt;height:88pt" />`;
   const animals = (() => {
     try {
       return JSON.parse(inv.animals || "[]");
@@ -118,7 +122,7 @@ export function generateInvoiceHTML(inv, options = {}) {
   .company img.logo { height: 50pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
   .tagline { font-size: 8pt; font-weight: 700; margin: 0 0 2pt; }
   .qr-wrap { height: 112pt; display: flex; align-items: center; justify-content: center; }
-  .qr-wrap img { width: 88pt; height: 88pt; image-rendering: pixelated; }
+  .qr-wrap img, .qr-wrap svg { width: 88pt; height: 88pt; image-rendering: pixelated; }
   .animals td { height: 15pt; vertical-align: middle !important; padding: 0 2pt !important; }
   .disc { font-size: 7pt; line-height: 1.18; padding: 1.5pt 3.5pt 2.5pt !important; }
   .app {
@@ -159,7 +163,7 @@ export function generateInvoiceHTML(inv, options = {}) {
       </colgroup>
       <tr>
         <td rowspan="2" class="pad0 vmid">
-          <div class="qr-wrap"><img src="${qrSrc}" alt="Policy QR code"></div>
+          <div class="qr-wrap">${qrMarkup}</div>
         </td>
         <td rowspan="2" class="company">
           <img class="logo" src="${LOGO_BASE64}" alt="IFFCO-TOKIO">

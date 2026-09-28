@@ -1,11 +1,11 @@
 import QRCode from "qrcode";
 
-// Generate a self-contained QR code as a PNG data URL for the given text.
-// No external service — always renders, even offline and in print.
-export async function generateQrDataUrl(text) {
+// Generate a QR code as an inline SVG string.
+// Inline SVG avoids data: URL / CSP issues inside iframes and always renders.
+export async function generateQrSvg(text) {
   try {
-    return await QRCode.toDataURL(text, {
-      width: 240,
+    return await QRCode.toString(text, {
+      type: "svg",
       margin: 0,
       color: { dark: "#000000", light: "#ffffff" },
       errorCorrectionLevel: "M",

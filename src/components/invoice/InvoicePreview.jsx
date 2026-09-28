@@ -1,23 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { generateInvoiceHTML } from "./invoiceTemplate";
-import { generateQrDataUrl } from "@/lib/qr";
+import { generateQrSvg } from "@/lib/qr";
 
 // Renders the invoice using the exact IFFCO-TOKIO template inside an iframe,
 // so it looks identical to the original PDF. Includes a Print button.
 export default function InvoicePreview({ invoice }) {
-  const [qrSrc, setQrSrc] = useState(null);
+  const [qrSvg, setQrSvg] = useState(null);
 
   useEffect(() => {
     const publicUrl = invoice?.id
       ? `${window.location.origin}/public/invoice/${invoice.id}`
-      : null;
-    if (!publicUrl) {
-      setQrSrc(null);
-      return;
-    }
+      : `${window.location.origin}/public/invoice`;
     let active = true;
-    generateQrDataUrl(publicUrl).then((url) => {
-      if (active) setQrSrc(url);
+    generateQrSvg(publicUrl).then((svg) => {
+      if (active) setQrSvg(svg);
     });
     return () => {
       active = false;
@@ -25,8 +21,8 @@ export default function InvoicePreview({ invoice }) {
   }, [invoice?.id]);
 
   const html = useMemo(
-    () => generateInvoiceHTML(invoice, { qrSrc }),
-    [invoice, qrSrc]
+    () => generateInvoiceHTML(invoice, { qrSvg }),
+    [invoice, qrSvg]
   );
 
   const handlePrint = () => {
