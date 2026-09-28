@@ -190,7 +190,7 @@ export function generateInvoiceHTML(inv, options = {}) {
       </tr>
       <tr>
         <td class="pad0 inv-cell">
-          <table class="kv inv">
+          <table class="kv inv split">
             <colgroup><col style="width:48%"><col style="width:52%"></colgroup>
             <tr><td class="k b">Intermediary #:</td><td class="v">${esc(
               inv.intermediary_no
