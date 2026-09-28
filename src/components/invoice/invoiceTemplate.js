@@ -132,19 +132,21 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   .app a { color: #00f; }
   .sig {
-    position: absolute; left: 40pt; top: 726pt; width: 230pt;
+    position: absolute; left: 40pt; top: 726pt; width: 270pt;
     font-size: 7pt; line-height: 1.13; font-weight: 400; color: #1a1a1a;
     background: transparent; padding: 0; z-index: 5;
+    display: flex; align-items: center; gap: 3pt;
   }
   #page1 .sig { top: 714pt; }
   .sig-icon {
-    position: absolute; left: 55pt; top: -6pt; z-index: 0;
-    color: #fdfd8d; font: 700 42pt/1 Helvetica, Arial, sans-serif;
-    text-shadow: 1pt 1pt 0 #000, -0.4pt -0.4pt 0 #000, 0.4pt -0.4pt 0 #000, -0.4pt 0.4pt 0 #000, 0.4pt 0.4pt 0 #000;
-    transform: scaleX(.82); transform-origin: center; opacity: .95;
+    flex: 0 0 auto; z-index: 0;
+    color: #ffffb3; font: 700 40pt/1 Helvetica, Arial, sans-serif;
+    text-shadow: 1.2pt 1.2pt 0 #000, 0.6pt 0.6pt 0.6pt rgba(0,0,0,.45);
+    transform: scaleX(.82); transform-origin: center; opacity: 1;
     user-select: none; pointer-events: none;
+    align-self: center;
   }
-  .sig-text { position: relative; z-index: 1; min-width: 210pt; }
+  .sig-text { position: relative; z-index: 1; flex: 1 1 auto; }
   .sig .title { font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111; }
   @media print {
     html, body { background: #fff; }
@@ -360,7 +362,6 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
   </div>
 
   <div class="sig">
-    <span class="sig-icon" aria-hidden="true">?</span>
     <div class="sig-text">
       <div class="title">Signature Not Verified</div>
       Digitally signed by ${sigName}<br>
@@ -368,6 +369,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
       Reason: ${sigReason}<br>
       Location: ${sigLocation}
     </div>
+    <span class="sig-icon" aria-hidden="true">?</span>
   </div>
 </div>
 
@@ -463,7 +465,6 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
   </div>
 
   <div class="sig">
-    <span class="sig-icon" aria-hidden="true">?</span>
     <div class="sig-text">
       <div class="title">Signature Not Verified</div>
       Digitally signed by ${sigName}<br>
@@ -471,6 +472,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
       Reason: ${sigReason}<br>
       Location: ${sigLocation}
     </div>
+    <span class="sig-icon" aria-hidden="true">?</span>
   </div>
 </div>
 
