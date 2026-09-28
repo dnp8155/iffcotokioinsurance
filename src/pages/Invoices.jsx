@@ -51,6 +51,16 @@ export default function Invoices() {
     }
   };
 
+  const fmtINR = (n) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2,
+    }).format(Number(n) || 0);
+
+  const totalPremium = invoices.reduce((s, i) => s + (Number(i.gross_premium) || 0), 0);
+  const totalSumInsured = invoices.reduce((s, i) => s + (Number(i.sum_insured) || 0), 0);
+
   return (
     <div className="min-h-screen bg-muted/30">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -75,6 +85,23 @@ export default function Invoices() {
           </div>
         </div>
 
+        {!loading && invoices.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            <div className="bg-card rounded-lg border border-border p-4">
+              <div className="text-xs text-muted-foreground">Total Invoices</div>
+              <div className="text-2xl font-bold mt-1">{invoices.length}</div>
+            </div>
+            <div className="bg-card rounded-lg border border-border p-4">
+              <div className="text-xs text-muted-foreground">Total Gross Premium</div>
+              <div className="text-2xl font-bold mt-1">{fmtINR(totalPremium)}</div>
+            </div>
+            <div className="bg-card rounded-lg border border-border p-4">
+              <div className="text-xs text-muted-foreground">Total Sum Insured</div>
+              <div className="text-2xl font-bold mt-1">{fmtINR(totalSumInsured)}</div>
+            </div>
+          </div>
+        )}
+
         {loading ? (
           <div className="flex justify-center py-20">
             <div className="w-8 h-8 border-4 border-muted border-t-primary rounded-full animate-spin" />
@@ -97,22 +124,20 @@ export default function Invoices() {
                     <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Policy No.</th>
                     <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Insured Name</th>
                     <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Issuance Date</th>
-                    <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Gross Premium</th>
+                    <th className="text-right px-4 py-3 font-medium whitespace-nowrap">Gross Premium</th>
                     <th className="text-right px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoices.map((inv) => (
-                    <tr key={inv.id} className="border-t border-border">
-                      <td className="px-4 py-3 font-medium">{inv.tax_invoice_no}</td>
-                      <td className="px-4 py-3">{inv.p400_policy}</td>
-                      <td className="px-4 py-3">{inv.insured_name}</td>
-                      <td className="px-4 py-3 text-muted-foreground">
-                        {inv.issuance_date}
-                      </td>
-                      <td className="px-4 py-3">{inv.gross_premium}</td>
+                    <tr key={inv.id} className="border-t border-border hover:bg-muted/30 transition-colors">
+                      <td className="px-4 py-3 font-medium">{inv.tax_invoice_no || "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{inv.p400_policy || "—"}</td>
+                      <td className="px-4 py-3">{inv.insured_name || "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{inv.issuance_date || "—"}</td>
+                      <td className="px-4 py-3 text-right font-medium tabular-nums">{fmtINR(inv.gross_premium)}</td>
                       <td className="px-4 py-3">
-                        <div className="flex justify-end gap-2">
+                        <div className="flex justify-end gap-1">
                           <Link to={`/invoices/${inv.id}`}>
                             <Button variant="ghost" size="sm">
                               <Eye className="w-4 h-4" />
@@ -130,26 +155,26 @@ export default function Invoices() {
                           >
                             <Trash2 className="w-4 h-4 text-destructive" />
                           </Button>
-                          </div>
-                          </td>
-                          </tr>
-                          ))}
-                          </tbody>
-                          </table>
-                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="md:hidden divide-y divide-border">
               {invoices.map((inv) => (
                 <div key={inv.id} className="p-4">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <div className="font-medium truncate">{inv.tax_invoice_no}</div>
-                      <div className="text-sm text-muted-foreground truncate">{inv.insured_name}</div>
+                      <div className="font-medium truncate">{inv.tax_invoice_no || "—"}</div>
+                      <div className="text-sm text-muted-foreground truncate">{inv.insured_name || "—"}</div>
                     </div>
-                    <div className="text-sm font-medium whitespace-nowrap">{inv.gross_premium}</div>
+                    <div className="text-sm font-medium whitespace-nowrap tabular-nums">{fmtINR(inv.gross_premium)}</div>
                   </div>
                   <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                    <span>Policy: {inv.p400_policy}</span>
-                    <span>{inv.issuance_date}</span>
+                    <span>Policy: {inv.p400_policy || "—"}</span>
+                    <span>{inv.issuance_date || "—"}</span>
                   </div>
                   <div className="mt-3 flex gap-2">
                     <Link to={`/invoices/${inv.id}`}>
