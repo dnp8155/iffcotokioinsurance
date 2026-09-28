@@ -131,19 +131,24 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 10pt; line-height: 1.28; font-weight: 400;
   }
   .app a { color: #00f; }
-  .sig {
-    position: absolute; left: 40pt; top: 726pt; width: 280pt; z-index: 5;
-    font-size: 7pt; line-height: 1.13; font-weight: 400; color: #1a1a1a;
-    background: transparent; padding: 0;
+  .sig-wrap {
+    position: absolute; left: 40pt; top: 726pt; width: 380pt; z-index: 5;
+    background: transparent;
   }
-  #page1 .sig { top: 714pt; }
-  .sig .title { font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111; }
-  .sig-icon {
-    position: absolute; right: -40pt; top: 50%;
-    transform: translateY(-50%) scaleX(.82); transform-origin: center;
+  #page1 .sig-wrap { top: 714pt; }
+  .sig-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .sig-table td { border: 0; padding: 0; vertical-align: middle; }
+  .sig-table .sig-text {
+    width: 320pt; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #1a1a1a;
+  }
+  .sig-table .sig-text .title {
+    font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111;
+  }
+  .sig-table .sig-icon-cell { width: 50pt; text-align: center; }
+  .sig-table .sig-icon {
     color: #ffffcc; font: 700 34pt/1 Helvetica, Arial, sans-serif;
     text-shadow: 1.2pt 1.2pt 0 #000, 0.5pt 0.5pt 0.8pt rgba(0,0,0,.4);
-    width: 30pt; text-align: center;
+    transform: scaleX(.82); transform-origin: center;
     user-select: none; pointer-events: none;
   }
   @media print {
@@ -359,13 +364,17 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
     </table>
   </div>
 
-  <div class="sig">
-    <div class="title">Signature Not Verified</div>
-    Digitally signed by ${sigName}<br>
-    Date: ${sigDate}<br>
-    Reason: ${sigReason}<br>
-    Location: ${sigLocation}
-    <span class="sig-icon" aria-hidden="true">?</span>
+  <div class="sig-wrap">
+    <table class="sig-table"><tr>
+      <td class="sig-text">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </td>
+      <td class="sig-icon-cell"><span class="sig-icon" aria-hidden="true">?</span></td>
+    </tr></table>
   </div>
 </div>
 
@@ -460,13 +469,17 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
     <span class="s9 b">To download CIS (Customer Information Sheet) click</span> <a class="b" href="https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf">https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf</a>
   </div>
 
-  <div class="sig">
-    <div class="title">Signature Not Verified</div>
-    Digitally signed by ${sigName}<br>
-    Date: ${sigDate}<br>
-    Reason: ${sigReason}<br>
-    Location: ${sigLocation}
-    <span class="sig-icon" aria-hidden="true">?</span>
+  <div class="sig-wrap">
+    <table class="sig-table"><tr>
+      <td class="sig-text">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </td>
+      <td class="sig-icon-cell"><span class="sig-icon" aria-hidden="true">?</span></td>
+    </tr></table>
   </div>
 </div>
 
