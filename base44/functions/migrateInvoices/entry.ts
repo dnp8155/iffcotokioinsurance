@@ -19,10 +19,29 @@ export default async function(req) {
 
     const supabase = getSupabaseServer();
 
+    // Only include fields that exist in the Supabase table (drop Base44-internal fields like is_sample)
+    const fields = [
+      'id','created_date','updated_date','created_by_id',
+      'tax_invoice_no','p400_policy','issuance_date','period_from','period_to',
+      'insured_name','address','place_of_supply','pin_code','ckyc','gstn',
+      'sum_insured','premium_taxable_value','gross_premium','hypothecation',
+      'purpose_of_animal','policy_excess','number_of_cattle',
+      'intermediary_no','intermediary_name','intermediary_phone',
+      'cgst_percentage','sgst_percentage','cgst_amount','sgst_amount',
+      'co_insurance_percentage','animals','pay_method','receipt_amount',
+      'instrument_no','instrument_date','bank',
+      'signature_name','signature_date','signature_reason','signature_location'
+    ];
+    const rows = base44Invoices.map(inv => {
+      const out = {};
+      for (const f of fields) { if (inv[f] !== undefined) out[f] = inv[f]; }
+      return out;
+    });
+
     // Upsert into Supabase (preserves IDs so existing QR codes / links still work)
     const { data, error } = await supabase
       .from('invoices')
-      .upsert(base44Invoices, { onConflict: 'id' })
+      .upsert(rows, { onConflict: 'id' })
       .select('id');
 
     if (error) return Response.json({ error: error.message }, { status: 500 });

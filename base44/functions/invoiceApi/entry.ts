@@ -36,7 +36,7 @@ export default async function(req) {
     }
 
     if (operation === 'create') {
-      const payload = { ...data, created_by_id: user.id };
+      const payload = { ...data, id: crypto.randomUUID(), created_by_id: user.id };
       const { data: row, error } = await supabase
         .from('invoices')
         .insert(payload)
