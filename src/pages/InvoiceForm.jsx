@@ -97,6 +97,10 @@ function Field({ label, value, onChange, full, type = "text" }) {
           onChange={(e) => onChange(e.target.value)}
           className="mt-1 text-sm"
           rows={2}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       ) : (
         <Input
@@ -104,6 +108,10 @@ function Field({ label, value, onChange, full, type = "text" }) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="mt-1 text-sm"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       )}
     </div>
