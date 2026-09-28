@@ -8,6 +8,12 @@ const esc = (v) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+// Mask CKYC: 8 fixed bold X's followed by only the last 4 digits of the value
+const maskCkyc = (ckyc) => {
+  const last4 = esc(String(ckyc == null ? "" : ckyc).slice(-4));
+  return `<span style="font-weight:700">XXXXXXXX</span>${last4}`;
+};
+
 // Build the animal rows table HTML from the animals array
 const animalRows = (animals) => {
   const list = Array.isArray(animals) ? animals : [];
@@ -253,7 +259,7 @@ export function generateInvoiceHTML(inv, options = {}) {
             <tr><td class="k">Pin code:</td><td class="v b">${esc(
               inv.pin_code
             )}</td></tr>
-            <tr><td class="k b">CKYC #:</td><td class="v b">${esc(
+            <tr><td class="k b">CKYC #:</td><td class="v b">${maskCkyc(
               inv.ckyc
             )}</td></tr>
             <tr><td class="k b">GSTN:</td><td class="v">${esc(
