@@ -7,6 +7,9 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
 // Add page imports here
+import Invoices from '@/pages/Invoices';
+import InvoiceForm from '@/pages/InvoiceForm';
+import InvoiceView from '@/pages/InvoiceView';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -35,6 +38,11 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       {/* Add your page Route elements here */}
+      <Route path="/invoices" element={<Invoices />} />
+      <Route path="/invoices/new" element={<InvoiceForm />} />
+      <Route path="/invoices/:id" element={<InvoiceView />} />
+      <Route path="/invoices/:id/edit" element={<InvoiceForm />} />
+      <Route path="/" element={<Invoices />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

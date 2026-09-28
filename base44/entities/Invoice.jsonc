@@ -1,0 +1,158 @@
+{
+  "name": "Invoice",
+  "type": "object",
+  "properties": {
+    "tax_invoice_no": {
+      "type": "string",
+      "title": "Tax Invoice No."
+    },
+    "p400_policy": {
+      "type": "string",
+      "title": "P400 Policy"
+    },
+    "issuance_date": {
+      "type": "string",
+      "title": "Issuance/Invoice Date"
+    },
+    "period_from": {
+      "type": "string",
+      "title": "Period of Insurance From"
+    },
+    "period_to": {
+      "type": "string",
+      "title": "To: Midnight on"
+    },
+    "insured_name": {
+      "type": "string",
+      "title": "Insured's Name"
+    },
+    "address": {
+      "type": "string",
+      "title": "Address"
+    },
+    "place_of_supply": {
+      "type": "string",
+      "title": "Place of Supply"
+    },
+    "pin_code": {
+      "type": "string",
+      "title": "Pin Code"
+    },
+    "ckyc": {
+      "type": "string",
+      "title": "CKYC #"
+    },
+    "gstn": {
+      "type": "string",
+      "title": "GSTN"
+    },
+    "sum_insured": {
+      "type": "number",
+      "title": "Sum Insured (INR)"
+    },
+    "premium_taxable_value": {
+      "type": "number",
+      "title": "Premium/Taxable Value (INR)"
+    },
+    "gross_premium": {
+      "type": "number",
+      "title": "Gross Premium Payable (INR)"
+    },
+    "hypothecation": {
+      "type": "string",
+      "title": "Hypothecation"
+    },
+    "purpose_of_animal": {
+      "type": "string",
+      "title": "Purpose Of Animal"
+    },
+    "policy_excess": {
+      "type": "string",
+      "title": "Policy Excess"
+    },
+    "number_of_cattle": {
+      "type": "number",
+      "title": "Number Of Cattle"
+    },
+    "intermediary_no": {
+      "type": "string",
+      "title": "Intermediary #"
+    },
+    "intermediary_name": {
+      "type": "string",
+      "title": "Intermediary Name"
+    },
+    "intermediary_phone": {
+      "type": "string",
+      "title": "Intermediary Phone #"
+    },
+    "cgst_percentage": {
+      "type": "number",
+      "title": "CGST Percentage",
+      "default": 9
+    },
+    "sgst_percentage": {
+      "type": "number",
+      "title": "SGST Percentage",
+      "default": 9
+    },
+    "cgst_amount": {
+      "type": "number",
+      "title": "CGST Amount"
+    },
+    "sgst_amount": {
+      "type": "number",
+      "title": "SGST Amount"
+    },
+    "co_insurance_percentage": {
+      "type": "number",
+      "title": "Co-Insurance %",
+      "default": 100
+    },
+    "animals": {
+      "type": "string",
+      "title": "Animals (JSON)"
+    },
+    "pay_method": {
+      "type": "string",
+      "title": "Pay Method"
+    },
+    "receipt_amount": {
+      "type": "number",
+      "title": "Receipt Amount"
+    },
+    "instrument_no": {
+      "type": "string",
+      "title": "Instrument #"
+    },
+    "instrument_date": {
+      "type": "string",
+      "title": "Instrument Date"
+    },
+    "bank": {
+      "type": "string",
+      "title": "Bank"
+    },
+    "signature_name": {
+      "type": "string",
+      "title": "Signature Name"
+    },
+    "signature_date": {
+      "type": "string",
+      "title": "Signature Date"
+    },
+    "signature_reason": {
+      "type": "string",
+      "title": "Signature Reason"
+    },
+    "signature_location": {
+      "type": "string",
+      "title": "Signature Location"
+    }
+  },
+  "required": [
+    "tax_invoice_no",
+    "p400_policy",
+    "insured_name"
+  ]
+}
