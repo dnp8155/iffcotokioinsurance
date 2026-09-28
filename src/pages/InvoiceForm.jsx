@@ -277,7 +277,7 @@ export default function InvoiceForm() {
             <Field label="Place of Supply" value={inv.place_of_supply} onChange={set("place_of_supply")} />
             <Field label="Pin Code" value={inv.pin_code} onChange={set("pin_code")} />
             <Field label="CKYC #" value={inv.ckyc} onChange={set("ckyc")} />
-            <Field label="GSTN" value={inv.gstn} onChange={set("gstn")} autoComplete="off" />
+            <Field label="GSTN" value={inv.gstn} onChange={set("gstn")} autoComplete="new-password" />
           </Section>
 
           <Section title="Intermediary Details">
