@@ -143,10 +143,10 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111;
   }
   .sig-icon {
-    display: block; margin: 3pt 0 0 62pt;
+    display: block; margin: 4pt auto 0;
     color: #ffffcc; font: 700 36pt/1 Helvetica, Arial, sans-serif;
     text-shadow: 1.2pt 1.2pt 0 #000, 0.5pt 0.5pt 0.8pt rgba(0,0,0,.4);
-    transform: scaleX(.82); transform-origin: top left;
+    transform: scaleX(.82); transform-origin: top center;
     user-select: none; pointer-events: none;
   }
   @media print {
