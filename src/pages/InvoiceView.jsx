@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { getSupabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Pencil } from "lucide-react";
 import InvoicePreview from "@/components/invoice/InvoicePreview";
@@ -12,8 +12,9 @@ export default function InvoiceView() {
 
   useEffect(() => {
     (async () => {
-      const res = await base44.functions.invoke("invoiceApi", { operation: "get", id });
-      setInvoice(res.data.invoice);
+      const supabase = await getSupabase();
+      const { data, error } = await supabase.from('invoices').select('*').eq('id', id).single();
+      setInvoice(error ? null : data);
       setLoading(false);
     })();
   }, [id]);

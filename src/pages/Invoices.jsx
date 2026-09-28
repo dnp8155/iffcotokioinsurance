@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { getSupabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Plus, FileText, Eye, Pencil, Trash2 } from "lucide-react";
 
@@ -11,8 +11,10 @@ export default function Invoices() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await base44.functions.invoke("invoiceApi", { operation: "list" });
-      setInvoices(res.data.invoices || []);
+      const supabase = await getSupabase();
+      const { data, error } = await supabase.from('invoices').select('*').order('created_date', { ascending: false }).limit(200);
+      if (error) throw error;
+      setInvoices(data || []);
     } finally {
       setLoading(false);
     }
@@ -24,7 +26,8 @@ export default function Invoices() {
 
   const handleDelete = async (id) => {
     if (!confirm("Delete this invoice?")) return;
-    await base44.functions.invoke("invoiceApi", { operation: "delete", id });
+    const supabase = await getSupabase();
+    await supabase.from('invoices').delete().eq('id', id);
     load();
   };
 

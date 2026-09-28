@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { getSupabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -99,14 +99,19 @@ export default function InvoiceForm() {
   useEffect(() => {
     if (!isEdit) return;
     (async () => {
-      const res = await base44.functions.invoke("invoiceApi", { operation: "get", id });
-      const data = res.data.invoice;
-      setInv({ ...blankInvoice(), ...data });
       try {
-        const parsed = JSON.parse(data.animals || "[]");
-        setAnimals(parsed.length ? parsed : [emptyAnimal()]);
-      } catch {
-        setAnimals([emptyAnimal()]);
+        const supabase = await getSupabase();
+        const { data, error } = await supabase.from('invoices').select('*').eq('id', id).single();
+        if (error) throw error;
+        setInv({ ...blankInvoice(), ...data });
+        try {
+          const parsed = JSON.parse(data.animals || "[]");
+          setAnimals(parsed.length ? parsed : [emptyAnimal()]);
+        } catch {
+          setAnimals([emptyAnimal()]);
+        }
+      } catch (e) {
+        console.error('Failed to load invoice:', e);
       }
       setLoading(false);
     })();
@@ -142,11 +147,15 @@ export default function InvoiceForm() {
         co_insurance_percentage: Number(inv.co_insurance_percentage) || 100,
         receipt_amount: Number(inv.receipt_amount) || 0,
       };
+      const supabase = await getSupabase();
       if (isEdit) {
-        await base44.functions.invoke("invoiceApi", { operation: "update", id, data: payload });
+        const { error } = await supabase.from('invoices').update(payload).eq('id', id);
+        if (error) throw error;
       } else {
-        const res = await base44.functions.invoke("invoiceApi", { operation: "create", data: payload });
-        navigate(`/invoices/${res.data.invoice.id}`);
+        const { data: { user } } = await supabase.auth.getUser();
+        const { data: row, error } = await supabase.from('invoices').insert({ ...payload, created_by_id: user.id }).select('*').single();
+        if (error) throw error;
+        navigate(`/invoices/${row.id}`);
         return;
       }
       navigate(`/invoices/${id}`);
