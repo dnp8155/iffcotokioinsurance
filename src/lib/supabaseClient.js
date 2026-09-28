@@ -13,8 +13,14 @@ export async function getSupabase() {
 
   initPromise = (async () => {
     try {
-      const res = await base44.functions.invoke('supabaseConfig', {});
-      const { url, anonKey } = res.data;
+      // Local dev: read from Vite env vars if provided (no backend function needed).
+      let url = import.meta.env.VITE_SUPABASE_URL;
+      let anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      if (!url || !anonKey) {
+        const res = await base44.functions.invoke('supabaseConfig', {});
+        url = res.data.url;
+        anonKey = res.data.anonKey;
+      }
       if (!url || !anonKey) throw new Error('Supabase config not available');
       client = createClient(url, anonKey, {
         auth: {
