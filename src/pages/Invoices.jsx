@@ -11,8 +11,8 @@ export default function Invoices() {
   const load = async () => {
     setLoading(true);
     try {
-      const data = await base44.entities.Invoice.list("-created_date", 100);
-      setInvoices(data);
+      const res = await base44.functions.invoke("invoiceApi", { operation: "list" });
+      setInvoices(res.data.invoices || []);
     } finally {
       setLoading(false);
     }
@@ -24,7 +24,7 @@ export default function Invoices() {
 
   const handleDelete = async (id) => {
     if (!confirm("Delete this invoice?")) return;
-    await base44.entities.Invoice.delete(id);
+    await base44.functions.invoke("invoiceApi", { operation: "delete", id });
     load();
   };
 

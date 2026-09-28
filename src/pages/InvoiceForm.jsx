@@ -99,7 +99,8 @@ export default function InvoiceForm() {
   useEffect(() => {
     if (!isEdit) return;
     (async () => {
-      const data = await base44.entities.Invoice.get(id);
+      const res = await base44.functions.invoke("invoiceApi", { operation: "get", id });
+      const data = res.data.invoice;
       setInv({ ...blankInvoice(), ...data });
       try {
         const parsed = JSON.parse(data.animals || "[]");
@@ -142,10 +143,10 @@ export default function InvoiceForm() {
         receipt_amount: Number(inv.receipt_amount) || 0,
       };
       if (isEdit) {
-        await base44.entities.Invoice.update(id, payload);
+        await base44.functions.invoke("invoiceApi", { operation: "update", id, data: payload });
       } else {
-        const created = await base44.entities.Invoice.create(payload);
-        navigate(`/invoices/${created.id}`);
+        const res = await base44.functions.invoke("invoiceApi", { operation: "create", data: payload });
+        navigate(`/invoices/${res.data.invoice.id}`);
         return;
       }
       navigate(`/invoices/${id}`);

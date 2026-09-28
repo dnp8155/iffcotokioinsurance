@@ -12,8 +12,8 @@ export default function InvoiceView() {
 
   useEffect(() => {
     (async () => {
-      const data = await base44.entities.Invoice.get(id);
-      setInvoice(data);
+      const res = await base44.functions.invoke("invoiceApi", { operation: "get", id });
+      setInvoice(res.data.invoice);
       setLoading(false);
     })();
   }, [id]);
