@@ -170,7 +170,7 @@ export function generateInvoiceHTML(inv, options = {}) {
           <div class="tiny u" style="margin-top:1pt">UIN :-IRDAN106P0014V01200809</div>
         </td>
         <td>
-          <div class="s9 b">Servicing Office</div>
+          <div class="s9 b u">Servicing Office</div>
           <div>IFFCO TOKIO GEN INS CO LTD Vrundavan Arcade, F-<br>7(5,6,8),<br>Second Floor, Vrundavan Arcade<br>PATAN GUJARAT</div>
           <div style="margin-top:7pt">General Insurance Services: <b>997139</b></div>
           <div><b>GSTIN:</b> 24AAACI7573H1ZI</div>
