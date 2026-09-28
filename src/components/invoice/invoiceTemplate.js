@@ -45,13 +45,6 @@ export function generateInvoiceHTML(inv, options = {}) {
     }
   })();
 
-  const sigName = esc(inv.signature_name || "MOHINDRA SINGH INDOLIA");
-  const sigDate = esc(inv.signature_date || "2026.02.20 16:36:04 IST");
-  const sigReason = esc(inv.signature_reason || "Valid Policy Copy");
-  const sigLocation = esc(
-    inv.signature_location || "IFFCO Tokio General Insurance Company Ltd, India"
-  );
-
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,26 +124,6 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 10pt; line-height: 1.28; font-weight: 400;
   }
   .app a { color: #00f; }
-  .sig-wrap {
-    position: absolute; left: 40pt; top: 726pt; width: 320pt; z-index: 5;
-    background: transparent;
-  }
-  #page1 .sig-wrap { top: calc(714pt + 2px); }
-  .sig-text {
-    position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
-  }
-  .sig-text .sig-body { position: relative; z-index: 3; }
-  .sig-text .title {
-    font-size: 11pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
-  }
-  .sig-icon {
-    position: absolute; left: calc(50% - 80px); top: 2pt;
-    transform: translateX(-50%) scaleX(.82);
-    transform-origin: top center;
-    width: calc(52pt - 10px); height: calc(52pt - 12px);
-    z-index: 1; opacity: .95;
-    user-select: none; pointer-events: none;
-  }
   @media print {
     html, body { background: #fff; }
     .page { margin: 0; box-shadow: none; page-break-after: always; }
@@ -353,28 +326,15 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
 
     <table class="g">
       <tr>
-        <td class="warranty-title" style="padding:3pt 4pt">Warranty:</td>
+        <td class="warranty-title" style="padding:1pt 4pt">Warranty:</td>
       </tr>
       <tr>
-        <td style="padding:3pt 4pt;font-size:7pt">Notwithstanding anything stated to the contrary, it is here by declared and agreed that the coverage under the policy excludes the risk of Terrorism Damage as per printed clause attached.</td>
+        <td style="padding:1pt 4pt;font-size:7pt;line-height:1.15">Notwithstanding anything stated to the contrary, it is here by declared and agreed that the coverage under the policy excludes the risk of Terrorism Damage as per printed clause attached.</td>
       </tr>
       <tr>
-        <td class="s8 b" style="padding:3pt 4pt">Special Condition:</td>
+        <td class="s8 b" style="padding:1pt 4pt">Special Condition:</td>
       </tr>
     </table>
-  </div>
-
-  <div class="sig-wrap">
-    <div class="sig-text">
-      <div class="sig-body">
-        <div class="title">Signature Not Verified</div>
-        Digitally signed by ${sigName}<br>
-        Date: ${sigDate}<br>
-        Reason: ${sigReason}<br>
-        Location: ${sigLocation}
-      </div>
-      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
-    </div>
   </div>
 </div>
 
@@ -446,42 +406,28 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
 
     <table class="g" style="margin-top:2pt">
       <tr>
-        <td class="cancellation" style="padding:8pt 10pt 12pt;font-size:8pt;line-height:1.32">
+        <td class="cancellation" style="padding:4pt 10pt 5pt;font-size:8pt;line-height:1.22">
           <div class="s11 u b">Cancellation Clause</div>
-          <div style="margin-top:10pt">a) &nbsp;You/Insured can cancel the policy at any time during the policy period, by giving a notice in writing to Us/IFFCO Tokio. In such a<br>scenario, We/IFFCO Tokio shall:</div>
-          <div style="padding-left:36pt;margin-top:10pt">
-            <div style="margin-bottom:8pt">i) &nbsp;Refund proportion premium for unexpired policy period, if the term of the policy is upto one year and there is no claim(s)<br>made during the policy period.</div>
+          <div style="margin:3pt 0 0">a) &nbsp;You/Insured can cancel the policy at any time during the policy period, by giving a notice in writing to Us/IFFCO Tokio. In such a<br>scenario, We/IFFCO Tokio shall:</div>
+          <div style="padding-left:36pt;margin:3pt 0 0">
+            <div style="margin:0 0 2pt">i) &nbsp;Refund proportion premium for unexpired policy period, if the term of the policy is upto one year and there is no claim(s)<br>made during the policy period.</div>
             <div>ii) &nbsp;Refund premium for the unexpired policy period, in respect of policy with the term more than one year and risk coverage for<br>such policy years has not yet commenced.</div>
           </div>
-          <div style="margin-top:12pt;margin-bottom:6pt">b) &nbsp;We/IFFCO Tokio can cancel the policy only on the grounds of established fraud, by giving minimum notice of 7 days to You/Insured.<br>There would be no refund of premium on cancellation on grounds of established fraud.</div>
+          <div style="margin:3pt 0 0">b) &nbsp;We/IFFCO Tokio can cancel the policy only on the grounds of established fraud, by giving minimum notice of 7 days to You/Insured.<br>There would be no refund of premium on cancellation on grounds of established fraud.</div>
         </td>
       </tr>
     </table>
   </div>
 
-  <div class="app">
+  <div class="app" style="margin-top:6pt">
     <span class="s9 b">"For quick access to policy services and claim intimation &amp; settlement kindly down load our customer application from -</span><br>
     <a class="b" href="https://play.google.com/store/apps/details?id=com.iffcotokio.CustomerApp">https://play.google.com/store/apps/details?id=com.iffcotokio.CustomerApp</a> or<br>
     <a class="b" href="https://apps.apple.com/in/app/iffco-tokio-customer/id1346469176#?platform=iphone">https://apps.apple.com/in/app/iffco-tokio-customer/id1346469176#?platform=iphone</a> or Call our toll free number – 1<br>
     800 103 5499."
   </div>
-  <div class="app" style="margin-top:14pt">
+  <div class="app" style="margin-top:6pt">
     <span class="s9 b">To download CIS (Customer Information Sheet) click</span> <a class="b" href="https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf">https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf</a>
   </div>
-
-  <div class="sig-wrap">
-    <div class="sig-text">
-      <div class="sig-body">
-        <div class="title">Signature Not Verified</div>
-        Digitally signed by ${sigName}<br>
-        Date: ${sigDate}<br>
-        Reason: ${sigReason}<br>
-        Location: ${sigLocation}
-      </div>
-      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
-    </div>
-  </div>
-</div>
 
 </body>
 </html>`;
