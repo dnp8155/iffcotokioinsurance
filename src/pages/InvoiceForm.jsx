@@ -24,6 +24,13 @@ const nowTimestamp = () => {
   return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 };
 
+// Default date at midnight (00:00:00) for fields that should not show current time
+const midnightToday = () => {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} 00:00:00`;
+};
+
 // Default period_to: 3 years minus 1 day from today, at midnight (00:00:00)
 const periodToDefault = () => {
   const d = new Date();
@@ -63,7 +70,7 @@ const blankInvoice = () => ({
   pay_method: "",
   receipt_amount: "",
   instrument_no: "",
-  instrument_date: nowTimestamp(),
+  instrument_date: midnightToday(),
   bank: "",
   signature_name: "",
   signature_date: "",
