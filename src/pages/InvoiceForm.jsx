@@ -235,22 +235,22 @@ export default function InvoiceForm() {
   return (
     <div className="min-h-screen bg-muted/30">
       <div className="max-w-[1400px] mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col gap-3 mb-6">
           <div className="flex items-center gap-3">
-            <Link to="/invoices">
+            <Link to="/invoices" className="shrink-0">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-1" /> Back
               </Button>
             </Link>
-            <h1 className="text-2xl font-heading font-bold">
+            <h1 className="text-xl sm:text-2xl font-heading font-bold">
               {isEdit ? "Edit Invoice" : "New Invoice"}
             </h1>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" onClick={handlePrint} disabled={saving || pendingPrint}>
+            <Button variant="outline" onClick={handlePrint} disabled={saving || pendingPrint} className="flex-1 sm:flex-none">
               <Printer className="w-4 h-4 mr-2" /> {pendingPrint ? "Preparing..." : "Print"}
             </Button>
-            <Button onClick={() => handleSave()} disabled={saving}>
+            <Button onClick={() => handleSave()} disabled={saving} className="flex-1 sm:flex-none">
               <Save className="w-4 h-4 mr-2" /> {saving ? "Saving..." : "Save"}
             </Button>
           </div>

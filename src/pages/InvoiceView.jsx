@@ -41,19 +41,19 @@ export default function InvoiceView() {
   return (
     <div className="min-h-screen bg-muted/30">
       <div className="max-w-5xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-4">
-          <Link to="/invoices">
+        <div className="flex flex-col gap-3 mb-4">
+          <Link to="/invoices" className="self-start">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="w-4 h-4 mr-1" /> Back
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <Link to={`/invoices/${id}/edit`}>
-              <Button variant="outline" size="sm">
+            <Link to={`/invoices/${id}/edit`} className="flex-1">
+              <Button variant="outline" size="sm" className="w-full">
                 <Pencil className="w-4 h-4 mr-1" /> Edit
               </Button>
             </Link>
-            <Button variant="outline" size="sm" onClick={() => {
+            <Button variant="outline" size="sm" className="flex-1" onClick={() => {
               const iframe = document.getElementById("invoice-preview-frame");
               if (iframe) {
                 iframe.contentWindow.focus();
