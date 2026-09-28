@@ -137,8 +137,9 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   #page1 .sig-wrap { top: 714pt; }
   .sig-text {
-    position: relative; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000;
+    position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000;
   }
+  .sig-text .sig-body { position: relative; z-index: 3; }
   .sig-text .title {
     font-size: 11pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
   }
@@ -148,7 +149,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     transform-origin: top center;
     color: #ffff99; font: 700 32pt/1 Helvetica, Arial, sans-serif;
     text-shadow: 1.2pt 1.2pt 0 #000, 0.6pt 0.6pt 0.8pt rgba(0,0,0,.5);
-    z-index: 6; opacity: .95;
+    z-index: 1; opacity: .95;
     user-select: none; pointer-events: none;
   }
   @media print {
@@ -366,11 +367,13 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
 
   <div class="sig-wrap">
     <div class="sig-text">
-      <div class="title">Signature Not Verified</div>
-      Digitally signed by ${sigName}<br>
-      Date: ${sigDate}<br>
-      Reason: ${sigReason}<br>
-      Location: ${sigLocation}
+      <div class="sig-body">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </div>
       <span class="sig-icon" aria-hidden="true">?</span>
     </div>
   </div>
@@ -469,11 +472,13 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
 
   <div class="sig-wrap">
     <div class="sig-text">
-      <div class="title">Signature Not Verified</div>
-      Digitally signed by ${sigName}<br>
-      Date: ${sigDate}<br>
-      Reason: ${sigReason}<br>
-      Location: ${sigLocation}
+      <div class="sig-body">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </div>
       <span class="sig-icon" aria-hidden="true">?</span>
     </div>
   </div>
