@@ -272,7 +272,7 @@ export function generateInvoiceHTML(inv, options = {}) {
       </colgroup>
       <tr>
         <td class="c b">Premium Details</td>
-        <td class="c b">Co-Insurance Details</td>
+        <td class="b">Co-Insurance Details</td>
       </tr>
       <tr>
         <td class="pad0">
