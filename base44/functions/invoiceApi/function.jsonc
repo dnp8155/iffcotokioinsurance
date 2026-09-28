@@ -1,0 +1,4 @@
+{
+  "name": "invoiceApi",
+  "entry": "entry.ts"
+}

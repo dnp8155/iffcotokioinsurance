@@ -1,5 +1,5 @@
 {
-  "name": "untitled",
+  "name": "InvoiceFlow",
   "site": {
     "installCommand": "npm install",
     "buildCommand": "npm run build",

@@ -18,31 +18,39 @@ export const AuthProvider = ({ children }) => {
     let subscription = null;
 
     (async () => {
-      const supabase = await getSupabase();
+      try {
+        const supabase = await getSupabase();
 
-      // Check existing Supabase session
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-        setIsAuthenticated(true);
-      }
-      setAuthChecked(true);
-      setIsLoadingAuth(false);
-      setIsLoadingPublicSettings(false);
-
-      // Subscribe to auth state changes
-      const { data: { subscription: sub } } = supabase.auth.onAuthStateChange(
-        (_event, session) => {
-          if (session) {
-            setUser(session.user);
-            setIsAuthenticated(true);
-          } else {
-            setUser(null);
-            setIsAuthenticated(false);
-          }
+        // Check existing Supabase session
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          setUser(session.user);
+          setIsAuthenticated(true);
         }
-      );
-      subscription = sub;
+        setAuthChecked(true);
+        setIsLoadingAuth(false);
+        setIsLoadingPublicSettings(false);
+
+        // Subscribe to auth state changes
+        const { data: { subscription: sub } } = supabase.auth.onAuthStateChange(
+          (_event, session) => {
+            if (session) {
+              setUser(session.user);
+              setIsAuthenticated(true);
+            } else {
+              setUser(null);
+              setIsAuthenticated(false);
+            }
+          }
+        );
+        subscription = sub;
+      } catch (error) {
+        console.error("Failed to initialize Supabase auth:", error);
+        setAuthError(error);
+        setAuthChecked(true);
+        setIsLoadingAuth(false);
+        setIsLoadingPublicSettings(false);
+      }
     })();
 
     return () => {
