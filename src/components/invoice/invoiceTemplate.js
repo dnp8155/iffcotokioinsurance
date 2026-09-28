@@ -114,7 +114,7 @@ export function generateInvoiceHTML(inv) {
   .pad0 { padding: 0 !important; }
   .vmid { vertical-align: middle !important; }
   .company { text-align: center; padding: 0 3pt 3pt !important; }
-  .company img.logo { height: 108pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
+  .company img.logo { height: 50pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
   .tagline { font-size: 8pt; font-weight: 700; margin: 0 0 2pt; }
   .qr-wrap { height: 112pt; display: flex; align-items: center; justify-content: center; }
   .qr-wrap img { width: 88pt; height: 88pt; image-rendering: pixelated; }
