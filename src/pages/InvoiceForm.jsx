@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Trash2, ArrowLeft, Save } from "lucide-react";
+import { Plus, Trash2, ArrowLeft, Save, Printer } from "lucide-react";
 import InvoicePreview from "@/components/invoice/InvoicePreview";
 
 const emptyAnimal = () => ({
@@ -111,6 +111,8 @@ export default function InvoiceForm() {
   const [animals, setAnimals] = useState([emptyAnimal()]);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(isEdit);
+  const [savedId, setSavedId] = useState(null);
+  const [pendingPrint, setPendingPrint] = useState(false);
 
   useEffect(() => {
     if (!isEdit) return;
@@ -133,7 +135,21 @@ export default function InvoiceForm() {
     })();
   }, [id]);
 
-  const previewInvoice = { ...inv, animals: JSON.stringify(animals) };
+  // After saving a new invoice for print, wait for QR to regenerate then print
+  useEffect(() => {
+    if (!pendingPrint) return;
+    const timer = setTimeout(() => {
+      const iframe = document.getElementById("invoice-preview-frame");
+      if (iframe) {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+      }
+      setPendingPrint(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [pendingPrint]);
+
+  const previewInvoice = { ...inv, id: savedId || inv.id, animals: JSON.stringify(animals) };
 
   const set = (key) => (val) => setInv((p) => ({ ...p, [key]: val }));
 
@@ -146,7 +162,7 @@ export default function InvoiceForm() {
   const removeAnimal = (i) =>
     setAnimals((p) => p.filter((_, idx) => idx !== i));
 
-  const handleSave = async () => {
+  const handleSave = async ({ printAfter = false } = {}) => {
     setSaving(true);
     try {
       const payload = {
@@ -167,16 +183,37 @@ export default function InvoiceForm() {
       if (isEdit) {
         const { error } = await supabase.from('invoices').update(payload).eq('id', id);
         if (error) throw error;
+        if (printAfter) {
+          setPendingPrint(true);
+        } else {
+          navigate(`/invoices/${id}`);
+        }
       } else {
         const { data: { user } } = await supabase.auth.getUser();
         const { data: row, error } = await supabase.from('invoices').insert({ ...payload, created_by_id: user.id }).select('*').single();
         if (error) throw error;
-        navigate(`/invoices/${row.id}`);
-        return;
+        if (printAfter) {
+          setSavedId(row.id);
+          setPendingPrint(true);
+        } else {
+          navigate(`/invoices/${row.id}`);
+        }
       }
-      navigate(`/invoices/${id}`);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePrint = () => {
+    // New invoice not yet saved → save first so QR code has a valid ID, then print
+    if (!isEdit && !savedId) {
+      handleSave({ printAfter: true });
+      return;
+    }
+    const iframe = document.getElementById("invoice-preview-frame");
+    if (iframe) {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
     }
   };
 
@@ -202,9 +239,14 @@ export default function InvoiceForm() {
               {isEdit ? "Edit Invoice" : "New Invoice"}
             </h1>
           </div>
-          <Button onClick={handleSave} disabled={saving}>
-            <Save className="w-4 h-4 mr-2" /> {saving ? "Saving..." : "Save"}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={handlePrint} disabled={saving || pendingPrint}>
+              <Printer className="w-4 h-4 mr-2" /> {pendingPrint ? "Preparing..." : "Print"}
+            </Button>
+            <Button onClick={() => handleSave()} disabled={saving}>
+              <Save className="w-4 h-4 mr-2" /> {saving ? "Saving..." : "Save"}
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(380px,44%)] gap-6 items-start">
@@ -306,7 +348,7 @@ export default function InvoiceForm() {
 
         <div className="lg:sticky lg:top-4">
           <div className="text-sm font-semibold mb-2 text-muted-foreground">Live Preview</div>
-          <InvoicePreview invoice={previewInvoice} />
+          <InvoicePreview invoice={previewInvoice} showPrintButton={false} />
         </div>
         </div>
       </div>

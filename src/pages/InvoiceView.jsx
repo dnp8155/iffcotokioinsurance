@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getSupabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { ArrowLeft, Pencil, Printer } from "lucide-react";
 import InvoicePreview from "@/components/invoice/InvoicePreview";
 
 export default function InvoiceView() {
@@ -47,13 +47,24 @@ export default function InvoiceView() {
               <ArrowLeft className="w-4 h-4 mr-1" /> Back
             </Button>
           </Link>
-          <Link to={`/invoices/${id}/edit`}>
-            <Button variant="outline" size="sm">
-              <Pencil className="w-4 h-4 mr-1" /> Edit
+          <div className="flex items-center gap-2">
+            <Link to={`/invoices/${id}/edit`}>
+              <Button variant="outline" size="sm">
+                <Pencil className="w-4 h-4 mr-1" /> Edit
+              </Button>
+            </Link>
+            <Button variant="outline" size="sm" onClick={() => {
+              const iframe = document.getElementById("invoice-preview-frame");
+              if (iframe) {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+              }
+            }}>
+              <Printer className="w-4 h-4 mr-1" /> Print
             </Button>
-          </Link>
+          </div>
         </div>
-        <InvoicePreview invoice={invoice} />
+        <InvoicePreview invoice={invoice} showPrintButton={false} />
       </div>
     </div>
   );
