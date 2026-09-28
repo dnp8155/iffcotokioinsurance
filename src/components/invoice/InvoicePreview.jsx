@@ -92,7 +92,7 @@ export default function InvoicePreview({ invoice, showPrintButton = true }) {
             title="Invoice Preview"
             srcDoc={html}
             onLoad={handleLoad}
-            className="bg-[#5c5c5c]"
+            className="bg-white"
             style={{ width: PAGE_WIDTH_PX, height: docHeight, border: "none" }}
           />
         </div>

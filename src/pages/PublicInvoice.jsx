@@ -54,7 +54,7 @@ export default function PublicInvoice() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-200 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="w-9 h-9 border-4 border-slate-300 border-t-slate-700 rounded-full animate-spin" />
       </div>
     );
@@ -62,19 +62,19 @@ export default function PublicInvoice() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-200 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
         <p className="text-sm text-slate-500">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-200 flex justify-center py-6">
+    <div className="min-h-screen bg-white flex justify-center py-6">
       <iframe
         id="public-invoice-frame"
         title="Insurance Policy Document"
         srcDoc={html}
-        className="bg-[#5c5c5c] shadow-lg"
+        className="bg-white shadow-lg"
         style={{ width: "793px", maxWidth: "100%", height: "calc(100vh - 48px)", border: "none" }}
       />
     </div>

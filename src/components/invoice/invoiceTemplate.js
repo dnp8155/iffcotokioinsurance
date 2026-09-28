@@ -71,7 +71,7 @@ export function generateInvoiceHTML(inv, options = {}) {
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0;
-    background: #5c5c5c; color: #000;
+    background: #fff; color: #000;
     font-family: Helvetica, Arial, "Liberation Sans", sans-serif;
     font-weight: 400;
   }
