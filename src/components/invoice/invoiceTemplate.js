@@ -45,6 +45,13 @@ export function generateInvoiceHTML(inv, options = {}) {
     }
   })();
 
+  const sigName = esc(inv.signature_name || "MOHINDRA SINGH INDOLIA");
+  const sigDate = esc(inv.signature_date || "2026.02.20 16:36:04 IST");
+  const sigReason = esc(inv.signature_reason || "Valid Policy Copy");
+  const sigLocation = esc(
+    inv.signature_location || "IFFCO Tokio General Insurance Company Ltd, India"
+  );
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,6 +131,26 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 10pt; line-height: 1.28; font-weight: 400;
   }
   .app a { color: #00f; }
+  .sig-wrap {
+    position: absolute; left: 40pt; top: 726pt; width: 320pt; z-index: 5;
+    background: transparent;
+  }
+  #page1 .sig-wrap { top: calc(714pt + 2px); }
+  .sig-text {
+    position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
+  }
+  .sig-text .sig-body { position: relative; z-index: 3; }
+  .sig-text .title {
+    font-size: 11pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
+  }
+  .sig-icon {
+    position: absolute; left: calc(50% - 80px); top: 2pt;
+    transform: translateX(-50%) scaleX(.82);
+    transform-origin: top center;
+    width: calc(52pt - 10px); height: calc(52pt - 12px);
+    z-index: 1; opacity: .95;
+    user-select: none; pointer-events: none;
+  }
   @media print {
     html, body { background: #fff; }
     .page { margin: 0; box-shadow: none; page-break-after: always; }
@@ -336,6 +363,19 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
       </tr>
     </table>
   </div>
+
+  <div class="sig-wrap">
+    <div class="sig-text">
+      <div class="sig-body">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </div>
+      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
+    </div>
+  </div>
 </div>
 
 <div class="page" id="page2">
@@ -428,6 +468,20 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
   <div class="app" style="margin-top:6pt">
     <span class="s9 b">To download CIS (Customer Information Sheet) click</span> <a class="b" href="https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf">https://www.iffcotokio.co.in/portal-content/pdf/cis-pdm.pdf</a>
   </div>
+
+  <div class="sig-wrap">
+    <div class="sig-text">
+      <div class="sig-body">
+        <div class="title">Signature Not Verified</div>
+        Digitally signed by ${sigName}<br>
+        Date: ${sigDate}<br>
+        Reason: ${sigReason}<br>
+        Location: ${sigLocation}
+      </div>
+      <img class="sig-icon" src="https://media.base44.com/images/public/6aba6bc5c89322218896178c/2e79724b0_ChatGPT_Image_Sep_29__2026__12_12_39_AM-removebg-preview.png" alt="?" />
+    </div>
+  </div>
+</div>
 
 </body>
 </html>`;
