@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { getSupabase } from "@/lib/supabaseClient";
 import { generateInvoiceHTML } from "@/components/invoice/invoiceTemplate";
 import { generateQrSvg } from "@/lib/qr";
 
@@ -16,11 +16,16 @@ export default function PublicInvoice() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await base44.functions.invoke("getPublicInvoice", { id });
-        if (res?.data?.invoice) {
-          setInvoice(res.data.invoice);
-        } else {
+        const supabase = await getSupabase();
+        const { data: invoice, error } = await supabase
+          .from("invoices")
+          .select("*")
+          .eq("id", id)
+          .single();
+        if (error || !invoice) {
           setError("Invoice not found");
+        } else {
+          setInvoice(invoice);
         }
       } catch (e) {
         setError(e?.message || "Failed to load invoice");
