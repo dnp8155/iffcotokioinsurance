@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getSupabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Plus, FileText, Eye, Pencil, Trash2 } from "lucide-react";
 
 export default function Invoices() {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pendingDelete, setPendingDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -24,11 +36,17 @@ export default function Invoices() {
     load();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!confirm("Delete this invoice?")) return;
-    const supabase = await getSupabase();
-    await supabase.from('invoices').delete().eq('id', id);
-    load();
+  const handleDelete = async () => {
+    if (!pendingDelete) return;
+    setDeleting(true);
+    try {
+      const supabase = await getSupabase();
+      await supabase.from('invoices').delete().eq('id', pendingDelete.id);
+      setPendingDelete(null);
+      load();
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -101,17 +119,17 @@ export default function Invoices() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => handleDelete(inv.id)}
+                            onClick={() => setPendingDelete(inv)}
                           >
                             <Trash2 className="w-4 h-4 text-destructive" />
                           </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                          </div>
+                          </td>
+                          </tr>
+                          ))}
+                          </tbody>
+                          </table>
+                          </div>
             <div className="md:hidden divide-y divide-border">
               {invoices.map((inv) => (
                 <div key={inv.id} className="p-4">
@@ -140,7 +158,7 @@ export default function Invoices() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleDelete(inv.id)}
+                      onClick={() => setPendingDelete(inv)}
                     >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>
@@ -151,6 +169,29 @@ export default function Invoices() {
           </div>
         )}
       </div>
+
+      <AlertDialog open={Boolean(pendingDelete)} onOpenChange={(open) => { if (!open && !deleting) setPendingDelete(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this invoice?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {pendingDelete
+                ? `Invoice "${pendingDelete.tax_invoice_no}" will be permanently deleted. This action cannot be undone.`
+                : ""}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              disabled={deleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
