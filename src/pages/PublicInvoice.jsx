@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { generateInvoiceHTML } from "@/components/invoice/invoiceTemplate";
+import { generateQrDataUrl } from "@/lib/qr";
 
 // Public invoice view — accessible without login. Reached by scanning the QR
 // code printed on the invoice. Renders the invoice and lets the viewer print
@@ -28,12 +29,24 @@ export default function PublicInvoice() {
     })();
   }, [id]);
 
+  const [qrSrc, setQrSrc] = useState(null);
+
+  useEffect(() => {
+    if (!id) return;
+    let active = true;
+    const publicUrl = `${window.location.origin}/public/invoice/${id}`;
+    generateQrDataUrl(publicUrl).then((url) => {
+      if (active) setQrSrc(url);
+    });
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
   const html = useMemo(() => {
     if (!invoice) return "";
-    const publicUrl = `${window.location.origin}/public/invoice/${id}`;
-    const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=${encodeURIComponent(publicUrl)}`;
     return generateInvoiceHTML(invoice, { qrSrc });
-  }, [invoice, id]);
+  }, [invoice, qrSrc]);
 
   const handlePrint = () => {
     const iframe = document.getElementById("public-invoice-frame");
