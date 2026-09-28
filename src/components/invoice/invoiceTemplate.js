@@ -162,7 +162,6 @@ export function generateInvoiceHTML(inv) {
         </td>
         <td rowspan="2" class="company">
           <img class="logo" src="${LOGO_BASE64}" alt="IFFCO-TOKIO">
-          <div class="tagline">Muskurate Raho</div>
           <div class="s11">IFFCO-TOKIO GENERAL<br>INSURANCE CO.LTD</div>
           <div class="tiny" style="margin-top:2pt;font-weight:400">Regd. Office: IFFCO Sadan C1 Distt. Centre, Saket,<br>New Delhi – 110017</div>
           <div class="s9 u" style="margin-top:3pt">Pashu Dhan Bima Policy ( Micro Insurance )</div>
