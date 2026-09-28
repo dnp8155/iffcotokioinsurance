@@ -116,7 +116,7 @@ export function generateInvoiceHTML(inv, options = {}) {
   .s8 { font-size: 8pt; }
   .s9 { font-size: 9pt; }
   .s11 { font-size: 11pt; }
-  .u { text-decoration: underline; }
+  .u { text-decoration: underline; text-decoration-skip-ink: auto; }
   .pad0 { padding: 0 !important; }
   .vmid { vertical-align: middle !important; }
   .company { text-align: center; padding: 0 3pt 3pt !important; }
