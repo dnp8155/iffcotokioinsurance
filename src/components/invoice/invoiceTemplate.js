@@ -135,7 +135,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     position: absolute; left: 40pt; top: 726pt; width: 320pt; z-index: 5;
     background: transparent;
   }
-  #page1 .sig-wrap { top: calc(714pt + 2px); }
+  #page1 .sig-wrap { top: calc(714pt + 2px - 10px); }
   .sig-text {
     position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
   }
