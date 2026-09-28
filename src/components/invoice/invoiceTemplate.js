@@ -132,22 +132,22 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   .app a { color: #00f; }
   .sig {
-    position: absolute; left: 40pt; top: 726pt; width: 270pt;
+    position: absolute; left: 40pt; top: 726pt; width: 320pt;
     font-size: 7pt; line-height: 1.13; font-weight: 400; color: #1a1a1a;
     background: transparent; padding: 0; z-index: 5;
-    display: flex; align-items: center; gap: 3pt;
+    display: flex; align-items: center; gap: 8pt;
   }
   #page1 .sig { top: 714pt; }
-  .sig-icon {
-    flex: 0 0 auto; z-index: 0;
-    color: #ffffb3; font: 700 40pt/1 Helvetica, Arial, sans-serif;
-    text-shadow: 1.2pt 1.2pt 0 #000, 0.6pt 0.6pt 0.6pt rgba(0,0,0,.45);
-    transform: scaleX(.82); transform-origin: center; opacity: 1;
-    user-select: none; pointer-events: none;
-    align-self: center;
-  }
-  .sig-text { position: relative; z-index: 1; flex: 1 1 auto; }
+  .sig-text { position: relative; z-index: 1; flex: 0 1 auto; }
   .sig .title { font-size: 11pt; line-height: 1.05; font-weight: 400; margin: 0 0 1pt; color: #111; }
+  .sig-icon {
+    flex: 0 0 30pt; width: 30pt; height: 30pt;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 0; color: #ffffcc; font: 700 34pt/1 Helvetica, Arial, sans-serif;
+    text-shadow: 1.2pt 1.2pt 0 #000, 0.5pt 0.5pt 0.8pt rgba(0,0,0,.4);
+    transform: scaleX(.82); transform-origin: center;
+    user-select: none; pointer-events: none;
+  }
   @media print {
     html, body { background: #fff; }
     .page { margin: 0; box-shadow: none; page-break-after: always; }
