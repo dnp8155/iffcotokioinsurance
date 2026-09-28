@@ -31,7 +31,8 @@ const animalRows = (animals) => {
 
 // Generate the full HTML document matching the original IFFCO-TOKIO template exactly,
 // with dynamic data injected. Adds the "Muskurate Raho" tagline present in the original.
-export function generateInvoiceHTML(inv) {
+export function generateInvoiceHTML(inv, options = {}) {
+  const qrSrc = options.qrSrc || QR_BASE64;
   const animals = (() => {
     try {
       return JSON.parse(inv.animals || "[]");
@@ -158,7 +159,7 @@ export function generateInvoiceHTML(inv) {
       </colgroup>
       <tr>
         <td rowspan="2" class="pad0 vmid">
-          <div class="qr-wrap"><img src="${QR_BASE64}" alt="Policy QR code"></div>
+          <div class="qr-wrap"><img src="${qrSrc}" alt="Policy QR code"></div>
         </td>
         <td rowspan="2" class="company">
           <img class="logo" src="${LOGO_BASE64}" alt="IFFCO-TOKIO">
