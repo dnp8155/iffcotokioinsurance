@@ -262,9 +262,9 @@ export function generateInvoiceHTML(inv, options = {}) {
             <tr><td class="k b">CKYC #:</td><td class="v b">${maskCkyc(
               inv.ckyc
             )}</td></tr>
-            <tr><td class="k b">GSTN:</td><td class="v">${esc(
+            <tr><td class="k b">GSTN:</td><td class="v"><input type="text" value="${esc(
               inv.gstn
-            )}</td></tr>
+            )}" style="width:100%;border:none;background:transparent;padding:0;font:inherit;font-size:7pt;line-height:1.2;outline:none" /></td></tr>
           </table>
         </td>
       </tr>
