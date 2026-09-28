@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, ArrowLeft, Save } from "lucide-react";
+import InvoicePreview from "@/components/invoice/InvoicePreview";
 
 const emptyAnimal = () => ({
   rfid: "",
@@ -110,6 +111,8 @@ export default function InvoiceForm() {
     })();
   }, [id]);
 
+  const previewInvoice = { ...inv, animals: JSON.stringify(animals) };
+
   const set = (key) => (val) => setInv((p) => ({ ...p, [key]: val }));
 
   const setAnimal = (i, key, val) =>
@@ -161,7 +164,7 @@ export default function InvoiceForm() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-[1400px] mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Link to="/invoices">
@@ -178,7 +181,11 @@ export default function InvoiceForm() {
           </Button>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(380px,44%)] gap-6 items-start">
         <div className="space-y-5">
+          <p className="text-xs text-muted-foreground bg-muted/40 rounded-md px-3 py-2">
+            Live preview on the right updates as you type.
+          </p>
           <Section title="Policy & Invoice Details">
             <Field label="Tax Invoice No." value={inv.tax_invoice_no} onChange={set("tax_invoice_no")} />
             <Field label="P400 Policy" value={inv.p400_policy} onChange={set("p400_policy")} />
@@ -269,6 +276,12 @@ export default function InvoiceForm() {
             <Field label="Signature Reason" value={inv.signature_reason} onChange={set("signature_reason")} />
             <Field label="Signature Location" value={inv.signature_location} onChange={set("signature_location")} />
           </Section>
+        </div>
+
+        <div className="lg:sticky lg:top-4">
+          <div className="text-sm font-semibold mb-2 text-muted-foreground">Live Preview</div>
+          <InvoicePreview invoice={previewInvoice} />
+        </div>
         </div>
       </div>
     </div>
