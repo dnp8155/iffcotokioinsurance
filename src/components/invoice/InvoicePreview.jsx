@@ -9,8 +9,8 @@ export default function InvoicePreview({ invoice, showPrintButton = true }) {
 
   useEffect(() => {
     const publicUrl = invoice?.id
-      ? `${window.location.origin}/public/invoice/${invoice.id}`
-      : `${window.location.origin}/public/invoice`;
+      ? `https://iffcotokioinsurance.vercel.app/public/invoice/${invoice.id}`
+      : `https://iffcotokioinsurance.vercel.app/public/invoice`;
     let active = true;
     generateQrSvg(publicUrl).then((svg) => {
       if (active) setQrSvg(svg);

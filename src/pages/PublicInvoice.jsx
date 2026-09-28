@@ -34,7 +34,7 @@ export default function PublicInvoice() {
   useEffect(() => {
     if (!id) return;
     let active = true;
-    const publicUrl = `${window.location.origin}/public/invoice/${id}`;
+    const publicUrl = `https://iffcotokioinsurance.vercel.app/public/invoice/${id}`;
     generateQrSvg(publicUrl).then((svg) => {
       if (active) setQrSvg(svg);
     });
