@@ -146,7 +146,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     position: absolute; left: calc(50% - 80px); top: 2pt;
     transform: translateX(-50%) scaleX(.82);
     transform-origin: top center;
-    color: #ffff99; font: 700 40pt/1 Helvetica, Arial, sans-serif;
+    color: #ffff99; font: 700 32pt/1 Helvetica, Arial, sans-serif;
     text-shadow: 1.2pt 1.2pt 0 #000, 0.6pt 0.6pt 0.8pt rgba(0,0,0,.5);
     z-index: 6; opacity: .95;
     user-select: none; pointer-events: none;
