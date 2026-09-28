@@ -143,7 +143,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 11pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
   }
   .sig-icon {
-    position: absolute; left: calc(50% - 150px); top: 2pt;
+    position: absolute; left: calc(50% + 50px); top: 2pt;
     transform: translateX(-50%) scaleX(.82);
     transform-origin: top center;
     color: #ffff99; font: 700 40pt/1 Helvetica, Arial, sans-serif;
