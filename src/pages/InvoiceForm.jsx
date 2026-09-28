@@ -87,7 +87,7 @@ function Section({ title, children }) {
   );
 }
 
-function Field({ label, value, onChange, full, type = "text" }) {
+function Field({ label, value, onChange, full, type = "text", autoComplete = "on" }) {
   return (
     <div className={full ? "md:col-span-2" : ""}>
       <Label className="text-xs text-muted-foreground">{label}</Label>
@@ -97,10 +97,7 @@ function Field({ label, value, onChange, full, type = "text" }) {
           onChange={(e) => onChange(e.target.value)}
           className="mt-1 text-sm"
           rows={2}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
+          autoComplete={autoComplete}
         />
       ) : (
         <Input
@@ -108,10 +105,7 @@ function Field({ label, value, onChange, full, type = "text" }) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="mt-1 text-sm"
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
+          autoComplete={autoComplete}
         />
       )}
     </div>
@@ -283,7 +277,7 @@ export default function InvoiceForm() {
             <Field label="Place of Supply" value={inv.place_of_supply} onChange={set("place_of_supply")} />
             <Field label="Pin Code" value={inv.pin_code} onChange={set("pin_code")} />
             <Field label="CKYC #" value={inv.ckyc} onChange={set("ckyc")} />
-            <Field label="GSTN" value={inv.gstn} onChange={set("gstn")} />
+            <Field label="GSTN" value={inv.gstn} onChange={set("gstn")} autoComplete="off" />
           </Section>
 
           <Section title="Intermediary Details">
