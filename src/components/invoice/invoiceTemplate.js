@@ -147,7 +147,7 @@ export function generateInvoiceHTML(inv, options = {}) {
     position: absolute; left: calc(50% - 80px); top: 2pt;
     transform: translateX(-50%) scaleX(.82);
     transform-origin: top center;
-    width: 52pt; height: calc(52pt - 10px);
+    width: calc(52pt - 10px); height: calc(52pt - 12px);
     z-index: 1; opacity: .95;
     user-select: none; pointer-events: none;
   }
