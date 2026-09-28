@@ -346,13 +346,13 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
 
     <table class="g">
       <tr>
-        <td>
+        <td style="padding:3pt 4pt 4pt">
           <div class="warranty-title">Warranty:</div>
           <div style="margin-top:2pt;font-size:7pt">Notwithstanding anything stated to the contrary, it is here by declared and agreed that the coverage under the policy excludes the risk of Terrorism Damage as per printed clause attached.</div>
         </td>
       </tr>
       <tr>
-        <td class="s8 b">Special Condition:</td>
+        <td class="s8 b" style="border-top:0.6pt solid #000;padding:3pt 4pt">Special Condition:</td>
       </tr>
     </table>
   </div>
