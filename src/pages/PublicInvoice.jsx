@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getSupabase } from "@/lib/supabaseClient";
 import { generateInvoiceHTML } from "@/components/invoice/invoiceTemplate";
@@ -35,6 +35,9 @@ export default function PublicInvoice() {
 
   const [qrSvg, setQrSvg] = useState(null);
 
+  const containerRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
   useEffect(() => {
     if (!id) return;
     let active = true;
@@ -46,6 +49,16 @@ export default function PublicInvoice() {
       active = false;
     };
   }, [id]);
+
+  useEffect(() => {
+    const updateScale = () => {
+      const w = containerRef.current?.clientWidth ?? 0;
+      if (w > 0) setScale(Math.min(1, w / 793));
+    };
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
   const html = useMemo(() => {
     if (!invoice) return "";
@@ -69,14 +82,24 @@ export default function PublicInvoice() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex justify-center py-6">
-      <iframe
-        id="public-invoice-frame"
-        title="Insurance Policy Document"
-        srcDoc={html}
-        className="bg-white shadow-lg"
-        style={{ width: "793px", maxWidth: "100%", height: "calc(100vh - 48px)", border: "none" }}
-      />
+    <div className="min-h-screen bg-slate-50 flex justify-center py-6">
+      <div ref={containerRef} className="w-full max-w-[793px] overflow-hidden bg-white shadow-lg" style={{ height: 2310 * scale }}>
+        <div
+          style={{
+            width: 793,
+            height: 2310,
+            transformOrigin: "top left",
+            transform: `scale(${scale})`,
+          }}
+        >
+          <iframe
+            id="public-invoice-frame"
+            title="Insurance Policy Document"
+            srcDoc={html}
+            style={{ width: 793, height: 2310, border: "none" }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
