@@ -17,12 +17,28 @@ const emptyAnimal = () => ({
   loan_account: "",
 });
 
+// Format current timestamp as DD/MM/YYYY HH:MM:SS
+const nowTimestamp = () => {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+};
+
+// Default period_to: 3 years minus 1 day from today, at midnight (00:00:00)
+const periodToDefault = () => {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() + 3);
+  d.setDate(d.getDate() - 1);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} 00:00:00`;
+};
+
 const blankInvoice = () => ({
   tax_invoice_no: "",
   p400_policy: "",
-  issuance_date: "",
-  period_from: "",
-  period_to: "",
+  issuance_date: nowTimestamp(),
+  period_from: nowTimestamp(),
+  period_to: periodToDefault(),
   insured_name: "",
   address: "",
   place_of_supply: "",
@@ -36,8 +52,8 @@ const blankInvoice = () => ({
   purpose_of_animal: "",
   policy_excess: "",
   number_of_cattle: "",
-  intermediary_no: "",
-  intermediary_name: "",
+  intermediary_no: "I6000153",
+  intermediary_name: "JIGNA SACHINKUMAR CHAUDHARY",
   intermediary_phone: "",
   cgst_percentage: 9,
   sgst_percentage: 9,
@@ -47,7 +63,7 @@ const blankInvoice = () => ({
   pay_method: "",
   receipt_amount: "",
   instrument_no: "",
-  instrument_date: "",
+  instrument_date: nowTimestamp(),
   bank: "",
   signature_name: "",
   signature_date: "",
