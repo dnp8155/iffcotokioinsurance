@@ -106,11 +106,12 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   table.prem td.v { padding: 0.7pt 4pt; }
   .c { text-align: center; }
-  .b, .b td, b, strong { font-weight: 700 !important; }
+  .b, .b td, td.b, tr.b > td, tr.b td, b, strong { font-weight: 700 !important; }
   .company .s11, .company .s9, .company .tiny.u { font-weight: 700 !important; }
   .disc, .conditions, .conditions table.kv td, .cancellation { font-weight: 700 !important; }
   .animals .animal-head td, .animals .animal-title { font-weight: 700 !important; }
   .warranty-title { font-size: 10pt; font-weight: 700 !important; }
+  .tagline { font-weight: 700 !important; }
   .tiny { font-size: 6pt; }
   .s8 { font-size: 8pt; }
   .s9 { font-size: 9pt; }
