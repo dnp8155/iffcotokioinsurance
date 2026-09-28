@@ -138,8 +138,10 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   #page1 .sig { top: 714pt; }
   .sig-icon {
-    position: absolute; left: 118pt; top: 2pt; z-index: 0;
-    width: 44pt; height: 44pt; opacity: .85;
+    position: absolute; left: 55pt; top: -6pt; z-index: 0;
+    color: #fdfd8d; font: 700 42pt/1 Helvetica, Arial, sans-serif;
+    text-shadow: 1pt 1pt 0 #000, -0.4pt -0.4pt 0 #000, 0.4pt -0.4pt 0 #000, -0.4pt 0.4pt 0 #000, 0.4pt 0.4pt 0 #000;
+    transform: scaleX(.82); transform-origin: center; opacity: .95;
     user-select: none; pointer-events: none;
   }
   .sig-text { position: relative; z-index: 1; min-width: 210pt; }
@@ -358,11 +360,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
   </div>
 
   <div class="sig">
-    <svg class="sig-icon" aria-hidden="true" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="46" fill="#2e6da4" opacity="0.15"/>
-      <circle cx="50" cy="50" r="46" fill="none" stroke="#2e6da4" stroke-width="4"/>
-      <path d="M30 51 L44 65 L72 35" fill="none" stroke="#2e6da4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <span class="sig-icon" aria-hidden="true">?</span>
     <div class="sig-text">
       <div class="title">Signature Not Verified</div>
       Digitally signed by ${sigName}<br>
@@ -465,11 +463,7 @@ However, an unregistered GST customer can apply for refund of the GST amount fro
   </div>
 
   <div class="sig">
-    <svg class="sig-icon" aria-hidden="true" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="46" fill="#2e6da4" opacity="0.15"/>
-      <circle cx="50" cy="50" r="46" fill="none" stroke="#2e6da4" stroke-width="4"/>
-      <path d="M30 51 L44 65 L72 35" fill="none" stroke="#2e6da4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <span class="sig-icon" aria-hidden="true">?</span>
     <div class="sig-text">
       <div class="title">Signature Not Verified</div>
       Digitally signed by ${sigName}<br>
