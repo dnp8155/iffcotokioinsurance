@@ -52,12 +52,26 @@ export default function PublicInvoice() {
 
   useEffect(() => {
     const updateScale = () => {
-      const w = containerRef.current?.clientWidth ?? 0;
-      if (w > 0) setScale(Math.min(1, w / 793));
+      // Use window.innerWidth (or container clientWidth) with padding to fit screen perfectly
+      const screenW = window.innerWidth || document.documentElement.clientWidth || 793;
+      const availableW = Math.min(screenW, containerRef.current?.clientWidth || screenW);
+      // Fit 793.7px (210mm A4) into available screen width
+      if (availableW > 0) {
+        setScale(Math.min(1, availableW / 794));
+      }
     };
     updateScale();
+    // Re-check shortly after mount to ensure mobile browser dimensions are ready
+    const t1 = setTimeout(updateScale, 100);
+    const t2 = setTimeout(updateScale, 400);
     window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+    window.addEventListener("orientationchange", updateScale);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("resize", updateScale);
+      window.removeEventListener("orientationchange", updateScale);
+    };
   }, []);
 
   const html = useMemo(() => {
@@ -102,10 +116,10 @@ export default function PublicInvoice() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex justify-center py-4">
+    <div className="min-h-screen bg-slate-100 flex justify-center py-0 sm:py-4">
       <div
         ref={containerRef}
-        className="w-full max-w-[793px] overflow-hidden bg-white shadow-lg"
+        className="w-full max-w-[794px] overflow-hidden bg-white shadow-sm"
         style={{ height: docHeight * scale }}
       >
         <div
