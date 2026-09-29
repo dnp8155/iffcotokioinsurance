@@ -63,6 +63,7 @@ export function generateInvoiceHTML(inv, options = {}) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 <title>Pashu Dhan Bima Policy (Micro Insurance) &amp; Tax Invoice - ${esc(
     inv.p400_policy
   )}</title>
@@ -141,6 +142,10 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-size: 9.5pt; line-height: 1.25; font-weight: 400;
   }
   .app a { color: #00f; }
+  table.g a, table.g a:visited, a[href^="tel"], a[href^="sms"], .animals a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
   .sig-wrap {
     position: relative; margin: 12pt 27pt 0 27pt; width: 320pt; z-index: 5;
     background: transparent;
