@@ -67,7 +67,10 @@ export function generateInvoiceHTML(inv, options = {}) {
     inv.p400_policy
   )}</title>
 <style>
-  @page { size: A4; margin: 0; }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0;
@@ -76,11 +79,13 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-weight: 400;
   }
   .page {
-    width: 595pt; height: 842pt; background: #fff;
-    margin: 16px auto; padding: 0; position: relative; overflow: hidden;
+    width: 210mm; height: 297mm; background: #fff;
+    margin: 0 auto; padding: 0; position: relative; overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
   }
+  .page + .page { margin-top: 12px; }
   .sheet { margin: 23.7pt 27pt 0 27pt; width: 541pt; }
+  #page1 .sheet { max-height: 728pt; overflow: hidden; }
   table.g {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
@@ -138,10 +143,11 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   .app a { color: #00f; }
   .sig-wrap {
-    position: absolute; left: 40pt; top: 776pt; width: 320pt; z-index: 5;
+    position: absolute; left: 27pt; top: 776pt; width: 320pt; z-index: 5;
     background: transparent;
   }
   #page1 .sig-wrap { top: calc(764pt + 2px - 10px); }
+  #page2 .sig-wrap { top: auto; bottom: 25pt; left: 27pt; }
   .sig-text {
     position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
   }
@@ -158,9 +164,42 @@ export function generateInvoiceHTML(inv, options = {}) {
     user-select: none; pointer-events: none;
   }
   @media print {
-    html, body { background: #fff; }
-    .page { margin: 0; box-shadow: none; page-break-after: always; }
-    .page:last-child { page-break-after: auto; }
+    html, body {
+      background: #fff;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 210mm;
+      height: auto;
+      overflow: hidden;
+    }
+    .page {
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      width: 210mm !important;
+      height: 297mm !important;
+      max-height: 297mm !important;
+      position: relative !important;
+      overflow: hidden !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .page + .page {
+      margin-top: 0 !important;
+    }
+    .page:last-child {
+      page-break-after: avoid !important;
+      break-after: avoid !important;
+    }
+    #page1 .sheet { max-height: 728pt; overflow: hidden; }
+    .sig-wrap {
+      position: absolute; left: 27pt; top: auto;
+      margin: 0;
+    }
+    #page1 .sig-wrap { top: calc(764pt + 2px - 10px); bottom: auto; }
+    #page2 .sig-wrap { bottom: 25pt; top: auto; left: 27pt; }
   }
 </style>
 </head>
