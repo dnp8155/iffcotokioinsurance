@@ -232,10 +232,10 @@ export function generateInvoiceHTML(inv, options = {}) {
     }
     #page1 .sig-wrap {
       display: block !important;
-      position: relative !important;
-      left: auto !important;
-      bottom: auto !important;
-      margin: 6pt 27pt 0 27pt !important;
+      position: absolute !important;
+      left: 27pt !important;
+      bottom: 20pt !important;
+      margin: 0 !important;
     }
     #page2 .sig-wrap {
       display: block !important;
