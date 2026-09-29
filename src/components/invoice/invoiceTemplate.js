@@ -84,21 +84,20 @@ export function generateInvoiceHTML(inv, options = {}) {
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
   }
   .page + .page { margin-top: 12px; }
-  .sheet { margin: 23.7pt 27pt 0 27pt; width: 541pt; }
-  #page1 .sheet { max-height: 728pt; overflow: hidden; }
+  .sheet { margin: 20pt 27pt 0 27pt; width: 541pt; }
   table.g {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
   table.g + table.g { margin-top: -0.6pt; }
   table.g > tbody > tr > td, table.g > tr > td {
     border: 0.6pt solid #000; vertical-align: top;
-    padding: 1pt 3pt; font-size: 7pt; line-height: 1.2; font-weight: 400;
+    padding: 0.8pt 3pt; font-size: 7pt; line-height: 1.15; font-weight: 400;
   }
   table.kv {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
   table.kv td {
-    border: 0; padding: 0.6pt 3pt; font-size: 7pt; line-height: 1.2;
+    border: 0; padding: 0.5pt 3pt; font-size: 7pt; line-height: 1.15;
     font-weight: 400; vertical-align: top;
   }
   table.kv td.k {
@@ -113,41 +112,41 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   table.prem td.k {
     text-align: left; white-space: normal; border-right: 0.6pt solid #000;
-    padding: 0.7pt 4pt 0.7pt 3pt;
+    padding: 0.5pt 4pt 0.5pt 3pt;
   }
-  table.prem td.v { padding: 0.7pt 4pt; }
+  table.prem td.v { padding: 0.5pt 4pt; }
   .c { text-align: center; }
   .b, .b td, td.b, tr.b > td, tr.b td, b, strong { font-weight: 700 !important; }
   .company .s11, .company .s9, .company .tiny.u { font-weight: 700 !important; }
   .disc, .conditions, .conditions table.kv td, .cancellation { font-weight: 700 !important; }
   .animals .animal-head td, .animals .animal-title { font-weight: 700 !important; }
-  .warranty-title { font-size: 10pt; font-weight: 700 !important; }
+  .warranty-title { font-size: 9pt; font-weight: 700 !important; }
   .tagline { font-weight: 700 !important; }
   .tiny { font-size: 6pt; }
-  .s8 { font-size: 8pt; }
-  .s9 { font-size: 9pt; }
-  .s11 { font-size: 11pt; }
+  .s8 { font-size: 7.5pt; }
+  .s9 { font-size: 8.5pt; }
+  .s11 { font-size: 10.5pt; }
   .u { text-decoration: underline; text-decoration-skip-ink: none; }
   .pad0 { padding: 0 !important; }
   .vmid { vertical-align: middle !important; }
-  .company { text-align: center; padding: 0 3pt 3pt !important; }
-  .company img.logo { height: 50pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
-  .tagline { font-size: 8pt; font-weight: 700; margin: 0 0 2pt; }
-  .qr-wrap { height: 112pt; display: flex; align-items: center; justify-content: center; }
-  .qr-wrap img, .qr-wrap svg { width: 88pt; height: 88pt; image-rendering: pixelated; }
-  .animals td { height: 15pt; vertical-align: middle !important; padding: 0 2pt !important; }
-  .disc { font-size: 7pt; line-height: 1.18; padding: 1.5pt 3.5pt 2.5pt !important; }
+  .company { text-align: center; padding: 0 3pt 2pt !important; }
+  .company img.logo { height: 46pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
+  .tagline { font-size: 7.5pt; font-weight: 700; margin: 0 0 1pt; }
+  .qr-wrap { height: 104pt; display: flex; align-items: center; justify-content: center; }
+  .qr-wrap img, .qr-wrap svg { width: 84pt; height: 84pt; image-rendering: pixelated; }
+  .animals td { height: 13.5pt; vertical-align: middle !important; padding: 0 2pt !important; }
+  .disc { font-size: 6.5pt; line-height: 1.14; padding: 1pt 3pt !important; }
   .app {
-    margin: 22pt 27pt 0 27pt; width: 541pt;
-    font-size: 10pt; line-height: 1.28; font-weight: 400;
+    margin: 18pt 27pt 0 27pt; width: 541pt;
+    font-size: 9.5pt; line-height: 1.25; font-weight: 400;
   }
   .app a { color: #00f; }
   .sig-wrap {
-    position: absolute; left: 27pt; top: 776pt; width: 320pt; z-index: 5;
+    position: absolute; left: 27pt; bottom: 15pt; width: 320pt; z-index: 5;
     background: transparent;
   }
-  #page1 .sig-wrap { top: calc(764pt + 2px - 10px); }
-  #page2 .sig-wrap { top: auto; bottom: 25pt; left: 27pt; }
+  #page1 .sig-wrap { position: absolute; left: 27pt; bottom: 12pt; top: auto; }
+  #page2 .sig-wrap { position: absolute; left: 27pt; bottom: 18pt; top: auto; }
   .sig-text {
     position: relative; z-index: 2; font-size: 7pt; line-height: 1.13; font-weight: 400; color: #000; opacity: .8;
   }
@@ -193,13 +192,13 @@ export function generateInvoiceHTML(inv, options = {}) {
       page-break-after: avoid !important;
       break-after: avoid !important;
     }
-    #page1 .sheet { max-height: 728pt; overflow: hidden; }
+    #page1 .sheet { overflow: visible; }
     .sig-wrap {
       position: absolute; left: 27pt; top: auto;
       margin: 0;
     }
-    #page1 .sig-wrap { top: calc(764pt + 2px - 10px); bottom: auto; }
-    #page2 .sig-wrap { bottom: 25pt; top: auto; left: 27pt; }
+    #page1 .sig-wrap { position: absolute; left: 27pt; bottom: 12pt; top: auto; }
+    #page2 .sig-wrap { position: absolute; left: 27pt; bottom: 18pt; top: auto; }
   }
 </style>
 </head>
