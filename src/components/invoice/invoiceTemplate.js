@@ -195,43 +195,47 @@ export function generateInvoiceHTML(inv, options = {}) {
       break-after: avoid !important;
     }
     #page1 .sheet {
-      margin: 20pt 27pt 0 27pt !important;
+      margin: 14pt 27pt 0 27pt !important;
     }
     #page1 table.g > tbody > tr > td, #page1 table.g > tr > td {
-      padding: 1.2pt 3pt !important;
-      font-size: 7.2pt !important;
-      line-height: 1.25 !important;
+      padding: 0.9pt 3pt !important;
+      font-size: 6.9pt !important;
+      line-height: 1.16 !important;
     }
     #page1 table.kv td {
-      padding: 0.8pt 3pt !important;
-      font-size: 7.2pt !important;
-      line-height: 1.25 !important;
+      padding: 0.5pt 3pt !important;
+      font-size: 6.9pt !important;
+      line-height: 1.16 !important;
     }
     #page1 table.prem td.k, #page1 table.prem td.v {
-      padding: 1pt 4pt !important;
+      padding: 0.6pt 4pt !important;
     }
     #page1 .animals td {
-      height: 16pt !important;
-      font-size: 7.2pt !important;
+      height: 13pt !important;
+      font-size: 6.8pt !important;
+      padding: 0 2pt !important;
+    }
+    #page1 .company img.logo {
+      height: 42pt !important;
     }
     #page1 .disc {
-      font-size: 6.8pt !important;
-      line-height: 1.22 !important;
-      padding: 2.5pt 3.5pt !important;
+      font-size: 6.2pt !important;
+      line-height: 1.14 !important;
+      padding: 1.5pt 3pt !important;
     }
     #page1 .qr-wrap {
-      height: 114pt !important;
+      height: 96pt !important;
     }
     #page1 .qr-wrap img, #page1 .qr-wrap svg {
-      width: 90pt !important;
-      height: 90pt !important;
+      width: 78pt !important;
+      height: 78pt !important;
     }
     #page1 .sig-wrap {
       display: block !important;
       position: relative !important;
       left: auto !important;
       bottom: auto !important;
-      margin: 12pt 27pt 0 27pt !important;
+      margin: 6pt 27pt 0 27pt !important;
     }
     #page2 .sig-wrap {
       display: block !important;
