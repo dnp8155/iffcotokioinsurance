@@ -173,6 +173,7 @@ export function generateInvoiceHTML(inv, options = {}) {
       box-shadow: none !important;
       width: 210mm !important;
       height: 297mm !important;
+      min-height: 297mm !important;
       max-height: 297mm !important;
       position: relative !important;
       overflow: hidden !important;
@@ -188,11 +189,43 @@ export function generateInvoiceHTML(inv, options = {}) {
       page-break-after: avoid !important;
       break-after: avoid !important;
     }
+    #page1 .sheet {
+      margin: 20pt 27pt 0 27pt !important;
+    }
+    #page1 table.g > tbody > tr > td, #page1 table.g > tr > td {
+      padding: 1.2pt 3pt !important;
+      font-size: 7.2pt !important;
+      line-height: 1.25 !important;
+    }
+    #page1 table.kv td {
+      padding: 0.8pt 3pt !important;
+      font-size: 7.2pt !important;
+      line-height: 1.25 !important;
+    }
+    #page1 table.prem td.k, #page1 table.prem td.v {
+      padding: 1pt 4pt !important;
+    }
+    #page1 .animals td {
+      height: 16pt !important;
+      font-size: 7.2pt !important;
+    }
+    #page1 .disc {
+      font-size: 6.8pt !important;
+      line-height: 1.22 !important;
+      padding: 2.5pt 3.5pt !important;
+    }
+    #page1 .qr-wrap {
+      height: 114pt !important;
+    }
+    #page1 .qr-wrap img, #page1 .qr-wrap svg {
+      width: 90pt !important;
+      height: 90pt !important;
+    }
     #page1 .sig-wrap {
-      position: relative !important; left: auto !important; bottom: auto !important; margin: 10pt 27pt 0 27pt !important;
+      display: none !important; /* Signature is on Page 2 bottom-left */
     }
     #page2 .sig-wrap {
-      position: absolute !important; left: 27pt !important; bottom: 18pt !important; margin: 0 !important;
+      position: absolute !important; left: 27pt !important; bottom: 20pt !important; margin: 0 !important;
     }
   }
 </style>
