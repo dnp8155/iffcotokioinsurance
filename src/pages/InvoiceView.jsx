@@ -55,10 +55,30 @@ export default function InvoiceView() {
             </Link>
             <Button variant="outline" size="sm" className="flex-1" onClick={() => {
               const iframe = document.getElementById("invoice-preview-frame");
-              if (iframe) {
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print();
+              if (!iframe) return;
+              
+              // On mobile devices, printing an iframe directly causes layout and scale distortion.
+              // Opening the clean HTML in a temporary window/blob gives native, perfect 2-page A4 print.
+              const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              if (isMobile) {
+                const printDoc = iframe.srcdoc || iframe.contentDocument?.documentElement?.outerHTML;
+                if (printDoc) {
+                  const printWin = window.open("", "_blank");
+                  if (printWin) {
+                    printWin.document.open();
+                    printWin.document.write(printDoc);
+                    printWin.document.close();
+                    printWin.onload = () => {
+                      printWin.focus();
+                      printWin.print();
+                    };
+                    return;
+                  }
+                }
               }
+              
+              iframe.contentWindow.focus();
+              iframe.contentWindow.print();
             }}>
               <Printer className="w-4 h-4 mr-1" /> Print
             </Button>
