@@ -222,10 +222,18 @@ export function generateInvoiceHTML(inv, options = {}) {
       height: 90pt !important;
     }
     #page1 .sig-wrap {
-      display: none !important; /* Signature is on Page 2 bottom-left */
+      display: block !important;
+      position: relative !important;
+      left: auto !important;
+      bottom: auto !important;
+      margin: 12pt 27pt 0 27pt !important;
     }
     #page2 .sig-wrap {
-      position: absolute !important; left: 27pt !important; bottom: 20pt !important; margin: 0 !important;
+      display: block !important;
+      position: absolute !important;
+      left: 27pt !important;
+      bottom: 20pt !important;
+      margin: 0 !important;
     }
   }
 </style>
