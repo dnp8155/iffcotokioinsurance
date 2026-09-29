@@ -61,25 +61,12 @@ export default function InvoicePreview({ invoice, showPrintButton = true }) {
   const handlePrint = () => {
     const iframe = iframeRef.current || document.getElementById("invoice-preview-frame");
     if (!iframe) return;
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile) {
-      const printDoc = iframe.srcdoc || iframe.contentDocument?.documentElement?.outerHTML || html;
-      if (printDoc) {
-        const printWin = window.open("", "_blank");
-        if (printWin) {
-          printWin.document.open();
-          printWin.document.write(printDoc);
-          printWin.document.close();
-          printWin.onload = () => {
-            printWin.focus();
-            printWin.print();
-          };
-          return;
-        }
-      }
+    try {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    } catch (e) {
+      window.print();
     }
-    iframe.contentWindow.focus();
-    iframe.contentWindow.print();
   };
 
   return (
