@@ -189,10 +189,10 @@ export function generateInvoiceHTML(inv, options = {}) {
       break-after: avoid !important;
     }
     #page1 .sig-wrap {
-      position: absolute !important; left: 27pt !important; bottom: 8pt !important; margin: 0 !important;
+      position: relative !important; left: auto !important; bottom: auto !important; margin: 10pt 27pt 0 27pt !important;
     }
     #page2 .sig-wrap {
-      position: absolute !important; left: 27pt !important; bottom: 15pt !important; margin: 0 !important;
+      position: absolute !important; left: 27pt !important; bottom: 18pt !important; margin: 0 !important;
     }
   }
 </style>
