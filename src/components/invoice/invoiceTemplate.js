@@ -79,25 +79,25 @@ export function generateInvoiceHTML(inv, options = {}) {
     font-weight: 400;
   }
   .page {
-    width: 210mm; height: 297mm; background: #fff;
-    margin: 0 auto; padding: 0; position: relative; overflow: hidden;
+    width: 210mm; min-height: 297mm; height: auto; background: #fff;
+    margin: 0 auto; padding: 0 0 16pt 0; position: relative;
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
   }
   .page + .page { margin-top: 12px; }
-  .sheet { margin: 14pt 27pt 0 27pt; width: 541pt; }
+  .sheet { margin: 22pt 27pt 0 27pt; width: 541pt; }
   table.g {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
   table.g + table.g { margin-top: -0.6pt; }
   table.g > tbody > tr > td, table.g > tr > td {
     border: 0.6pt solid #000; vertical-align: top;
-    padding: 0.6pt 3pt; font-size: 6.5pt; line-height: 1.12; font-weight: 400;
+    padding: 0.9pt 3pt; font-size: 7pt; line-height: 1.18; font-weight: 400;
   }
   table.kv {
     width: 100%; border-collapse: collapse; table-layout: fixed;
   }
   table.kv td {
-    border: 0; padding: 0.4pt 3pt; font-size: 6.5pt; line-height: 1.12;
+    border: 0; padding: 0.6pt 3pt; font-size: 7pt; line-height: 1.18;
     font-weight: 400; vertical-align: top;
   }
   table.kv td.k {
@@ -112,53 +112,51 @@ export function generateInvoiceHTML(inv, options = {}) {
   }
   table.prem td.k {
     text-align: left; white-space: normal; border-right: 0.6pt solid #000;
-    padding: 0.4pt 4pt 0.4pt 3pt;
+    padding: 0.6pt 4pt 0.6pt 3pt;
   }
-  table.prem td.v { padding: 0.4pt 4pt; }
+  table.prem td.v { padding: 0.6pt 4pt; }
   .c { text-align: center; }
   .b, .b td, td.b, tr.b > td, tr.b td, b, strong { font-weight: 700 !important; }
   .company .s11, .company .s9, .company .tiny.u { font-weight: 700 !important; }
   .disc, .conditions, .conditions table.kv td, .cancellation { font-weight: 700 !important; }
   .animals .animal-head td, .animals .animal-title { font-weight: 700 !important; }
-  .warranty-title { font-size: 8pt; font-weight: 700 !important; }
+  .warranty-title { font-size: 9.5pt; font-weight: 700 !important; }
   .tagline { font-weight: 700 !important; }
-  .tiny { font-size: 5.5pt; }
-  .s8 { font-size: 7pt; }
-  .s9 { font-size: 8pt; }
-  .s11 { font-size: 9.5pt; }
+  .tiny { font-size: 6pt; }
+  .s8 { font-size: 7.5pt; }
+  .s9 { font-size: 8.5pt; }
+  .s11 { font-size: 10.5pt; }
   .u { text-decoration: underline; text-decoration-skip-ink: none; }
   .pad0 { padding: 0 !important; }
   .vmid { vertical-align: middle !important; }
-  .company { text-align: center; padding: 0 3pt 1pt !important; }
-  .company img.logo { height: 40pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
-  .tagline { font-size: 7pt; font-weight: 700; margin: 0 0 1pt; }
-  .qr-wrap { height: 92pt; display: flex; align-items: center; justify-content: center; }
-  .qr-wrap img, .qr-wrap svg { width: 76pt; height: 76pt; image-rendering: pixelated; }
-  .animals td { height: 11pt; vertical-align: middle !important; padding: 0 2pt !important; font-size: 6.2pt; }
-  .disc { font-size: 5.8pt; line-height: 1.1; padding: 0.8pt 2.5pt !important; }
+  .company { text-align: center; padding: 0 3pt 2pt !important; }
+  .company img.logo { height: 48pt; width: auto; max-width: 100%; display: block; margin: 0 auto 1pt; object-fit: contain; }
+  .tagline { font-size: 7.5pt; font-weight: 700; margin: 0 0 1pt; }
+  .qr-wrap { height: 108pt; display: flex; align-items: center; justify-content: center; }
+  .qr-wrap img, .qr-wrap svg { width: 84pt; height: 84pt; image-rendering: pixelated; }
+  .animals td { height: 13.5pt; vertical-align: middle !important; padding: 0 2pt !important; font-size: 6.8pt; }
+  .disc { font-size: 6.5pt; line-height: 1.15; padding: 1pt 3pt !important; }
   .app {
-    margin: 16pt 27pt 0 27pt; width: 541pt;
-    font-size: 9pt; line-height: 1.2; font-weight: 400;
+    margin: 18pt 27pt 0 27pt; width: 541pt;
+    font-size: 9.5pt; line-height: 1.25; font-weight: 400;
   }
   .app a { color: #00f; }
   .sig-wrap {
-    position: absolute; left: 27pt; bottom: 12pt; width: 320pt; z-index: 5;
+    position: relative; margin: 12pt 27pt 0 27pt; width: 320pt; z-index: 5;
     background: transparent;
   }
-  #page1 .sig-wrap { position: absolute; left: 27pt; bottom: 10pt; top: auto; }
-  #page2 .sig-wrap { position: absolute; left: 27pt; bottom: 18pt; top: auto; }
   .sig-text {
-    position: relative; z-index: 2; font-size: 6.5pt; line-height: 1.12; font-weight: 400; color: #000; opacity: .85;
+    position: relative; z-index: 2; font-size: 7pt; line-height: 1.15; font-weight: 400; color: #000; opacity: .85;
   }
   .sig-text .sig-body { position: relative; z-index: 3; }
   .sig-text .title {
-    font-size: 10pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
+    font-size: 10.5pt; line-height: 1.05; font-weight: 700; margin: 0 0 1pt; color: #000;
   }
   .sig-icon {
     position: absolute; left: calc(50% - 80px); top: 2pt;
     transform: translateX(-50%) scaleX(.82);
     transform-origin: top center;
-    width: calc(46pt - 13px); height: calc(46pt - 15px);
+    width: calc(50pt - 13px); height: calc(50pt - 15px);
     z-index: 1; opacity: .95;
     user-select: none; pointer-events: none;
   }
@@ -168,8 +166,6 @@ export function generateInvoiceHTML(inv, options = {}) {
       margin: 0 !important;
       padding: 0 !important;
       width: 210mm;
-      height: auto;
-      overflow: hidden;
     }
     .page {
       margin: 0 !important;
@@ -192,13 +188,12 @@ export function generateInvoiceHTML(inv, options = {}) {
       page-break-after: avoid !important;
       break-after: avoid !important;
     }
-    #page1 .sheet { overflow: visible; }
-    .sig-wrap {
-      position: absolute; left: 27pt; top: auto;
-      margin: 0;
+    #page1 .sig-wrap {
+      position: absolute !important; left: 27pt !important; bottom: 8pt !important; margin: 0 !important;
     }
-    #page1 .sig-wrap { position: absolute; left: 27pt; bottom: 12pt; top: auto; }
-    #page2 .sig-wrap { position: absolute; left: 27pt; bottom: 18pt; top: auto; }
+    #page2 .sig-wrap {
+      position: absolute !important; left: 27pt !important; bottom: 15pt !important; margin: 0 !important;
+    }
   }
 </style>
 </head>

@@ -65,6 +65,26 @@ export default function PublicInvoice() {
     return generateInvoiceHTML(invoice, { qrSvg });
   }, [invoice, qrSvg]);
 
+  const [docHeight, setDocHeight] = useState(2310);
+  const iframeRef = useRef(null);
+
+  const handleLoad = () => {
+    const measure = () => {
+      try {
+        const doc = iframeRef.current?.contentDocument;
+        const h = doc?.body?.scrollHeight;
+        if (h && h > 1000) {
+          setDocHeight(h + 20);
+        }
+      } catch {
+        // fallback
+      }
+    };
+    measure();
+    setTimeout(measure, 300);
+    setTimeout(measure, 800);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -82,21 +102,27 @@ export default function PublicInvoice() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex justify-center py-6">
-      <div ref={containerRef} className="w-full max-w-[793px] overflow-hidden bg-white shadow-lg" style={{ height: 2310 * scale }}>
+    <div className="min-h-screen bg-slate-50 flex justify-center py-4">
+      <div
+        ref={containerRef}
+        className="w-full max-w-[793px] overflow-hidden bg-white shadow-lg"
+        style={{ height: docHeight * scale }}
+      >
         <div
           style={{
             width: 793,
-            height: 2310,
+            height: docHeight,
             transformOrigin: "top left",
             transform: `scale(${scale})`,
           }}
         >
           <iframe
+            ref={iframeRef}
             id="public-invoice-frame"
             title="Insurance Policy Document"
             srcDoc={html}
-            style={{ width: 793, height: 2310, border: "none" }}
+            onLoad={handleLoad}
+            style={{ width: 793, height: docHeight, border: "none" }}
           />
         </div>
       </div>
