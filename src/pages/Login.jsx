@@ -8,6 +8,7 @@ import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 import GoogleIcon from "@/components/GoogleIcon";
 import { safeReturnTo } from "@/lib/authReturnTo";
+import { ENABLE_REGISTRATION } from "@/lib/authConfig";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -46,15 +47,17 @@ export default function Login() {
       title="Welcome back"
       subtitle="Log in to your account"
       footer={
-        <>
-          Don't have an account?{" "}
-          <Link
-            to={"/register" + (returnTo !== "/" ? "?returnTo=" + encodeURIComponent(returnTo) : "")}
-            className="text-primary font-medium hover:underline"
-          >
-            Create one
-          </Link>
-        </>
+        ENABLE_REGISTRATION ? (
+          <>
+            Don't have an account?{" "}
+            <Link
+              to={"/register" + (returnTo !== "/" ? "?returnTo=" + encodeURIComponent(returnTo) : "")}
+              className="text-primary font-medium hover:underline"
+            >
+              Create one
+            </Link>
+          </>
+        ) : null
       }
     >
       <Button
